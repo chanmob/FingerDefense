@@ -25,6 +25,8 @@ public class GameManager : Singleton<GameManager>
     public ObscuredInt cloverUpgrade = 0;
     [HideInInspector]
     public ObscuredInt waveCount;
+    [HideInInspector]
+    public ObscuredInt money = 100;
 
     [HideInInspector]
     public ObscuredBool[] CreatedPosition;
@@ -50,6 +52,7 @@ public class GameManager : Singleton<GameManager>
     private List<GameObject> cloverBulletList = new List<GameObject>();
 
     public Text waveText;
+    public Text MoneyText;
 
     public void TurretCreated()
     {
@@ -312,5 +315,10 @@ public class GameManager : Singleton<GameManager>
 
         if (waveCount == currentWave)
             EventManager.instance.waitForWaveToEndHandler();
+    }
+
+    public void MoneyTextRefresh()
+    {
+        MoneyText.text = money.ToString();
     }
 }
