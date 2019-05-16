@@ -349,8 +349,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef535b9e26be4e84a878f3e862039e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPlace: []
-  spawnIdx: 
+  currentWave:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
+  currenthp:
+    currentCryptoKey: 444444
+    hiddenValue: 444441
+    inited: 1
+    fakeValue: 5
+    fakeValueActive: 1
+  touchDamage:
+    currentCryptoKey: 444444
+    hiddenValue: 444445
+    inited: 1
+    fakeValue: 1
+    fakeValueActive: 1
+  heartUpgrade:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
+  spadeUpgrade:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
+  diamondUpgrade:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
+  cloverUpgrade:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
+  CreatedPosition: []
   spadeCards:
   - {fileID: 21300000, guid: 7840e80659b4d6849b2535a5c8787a98, type: 3}
   - {fileID: 21300000, guid: 1470e8c04a35f894ebbd432a3973732a, type: 3}
@@ -396,8 +437,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 593b760a93ca5274589b3872b9af2a0b, type: 3}
   - {fileID: 21300000, guid: c16c4203c5527134c8106656c2175730, type: 3}
   monsterParent: {fileID: 391488145}
+  bulletParent: {fileID: 1876208192}
   spawnPlaceParent: {fileID: 370899633}
   monsterPrefab: {fileID: 5384370861349468775, guid: a11a67757aba9f740af4d99ab33707c9,
+    type: 3}
+  heartBullet: {fileID: 2447117130216454594, guid: 77f851dcf42e4864690621803d75a660,
+    type: 3}
+  spadeBullet: {fileID: 6285206171476136781, guid: 1e212b6db65b6e740a69af884430fae4,
+    type: 3}
+  diamondBullet: {fileID: 7100888057755760283, guid: ebaf8bc99779c954683a3514a72a0983,
+    type: 3}
+  cloverBullet: {fileID: 7255852102525965685, guid: 3150487d2ead788468822d2fa128c138,
     type: 3}
   turrets:
   - {fileID: 5903903707080726392, guid: e1113feb0a233184bb4007fd7d511f0f, type: 3}
@@ -1311,7 +1361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1406996688
 GameObject:
@@ -1866,6 +1916,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1876208192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1876208193}
+  m_Layer: 0
+  m_Name: BulletList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1876208193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876208192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1979943650
 GameObject:
   m_ObjectHideFlags: 0

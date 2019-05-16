@@ -124,3 +124,4 @@ MonoBehaviour:
   turretLevel: 0
   turretPositionIndex: 0
   timeBetFire: 0
+  bullet: {fileID: 7100888057755760283, guid: ebaf8bc99779c954683a3514a72a0983, type: 3}

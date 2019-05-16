@@ -1,22 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeStage.AntiCheat.ObscuredTypes;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour, IDamageable
 {
-    public int hp;
-    public float speed = 1f;
+    public ObscuredInt maxHp;
+    public ObscuredInt curHp;
+    public ObscuredFloat speed = 1f;
+
+    public Image healthBar;
+
+    private void OnEnable()
+    {
+        var gm = GameManager.instance;
+        maxHp = gm.currentWave  * ((gm.currentWave / 10) + 1);
+        curHp = maxHp;
+        speed = 1f;
+        healthBar.fillAmount = 1;
+        
+        //보스는 제곱
+    }
 
     public void OnMouseDown()
     {
-        OnDamage(1);
+        OnDamage(GameManager.instance.touchDamage);
     }
 
     public void OnDamage(int _damage)
     {
-        hp -= _damage;
+        curHp -= _damage;
+        healthBar.fillAmount = (float)curHp / (float)maxHp;
 
-        if(hp <= 0)
+        if(curHp <= 0)
         {
             GameManager.instance.DisableMonster(this.gameObject);
         }

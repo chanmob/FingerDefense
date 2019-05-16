@@ -1,15 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeStage.AntiCheat.ObscuredTypes;
 
 public class GameManager : Singleton<GameManager>
 {
-    public List<Transform> spawnPlace = new List<Transform>();
+    private List<Transform> spawnPlace = new List<Transform>();
 
-    public List<int> spawnIdx = new List<int>();
-    private int currentWave = 0;
+    private List<int> spawnIdx = new List<int>();
+    [HideInInspector]
+    public ObscuredInt currentWave = 0;
+    [HideInInspector]
+    public ObscuredInt currenthp = 5;
+    [HideInInspector]
+    public ObscuredInt touchDamage = 1;
+    [HideInInspector]
+    public ObscuredInt heartUpgrade = 0;
+    [HideInInspector]
+    public ObscuredInt spadeUpgrade = 0;
+    [HideInInspector]
+    public ObscuredInt diamondUpgrade = 0;
+    [HideInInspector]
+    public ObscuredInt cloverUpgrade = 0;
 
-    private bool[] CreatedPosition;
+
+    [HideInInspector]
+    public ObscuredBool[] CreatedPosition;
 
     public Sprite[] spadeCards;
     public Sprite[] heartCards;
@@ -17,10 +33,20 @@ public class GameManager : Singleton<GameManager>
     public Sprite[] diamondCards;
 
     public GameObject monsterParent;
-    public GameObject spawnPlaceParent = null;
+    public GameObject bulletParent;
+    public GameObject spawnPlaceParent;
     public GameObject monsterPrefab;
+    public GameObject heartBullet;
+    public GameObject spadeBullet;
+    public GameObject diamondBullet;
+    public GameObject cloverBullet;
     public GameObject[] turrets;
     private List<GameObject> monsterList = new List<GameObject>();
+    private List<GameObject> spadeBulletList = new List<GameObject>();
+    private List<GameObject> heartBulletList = new List<GameObject>();
+    private List<GameObject> diamondBulletList = new List<GameObject>();
+    private List<GameObject> cloverBulletList = new List<GameObject>();
+
 
     public void TurretCreated()
     {
@@ -59,6 +85,92 @@ public class GameManager : Singleton<GameManager>
         Destroy(_object.gameObject);
     }
 
+    public GameObject GetBullet(string _type)
+    {
+        GameObject newBullet = null;
+
+        if (_type == "HEART")
+        {
+            if (heartBulletList.Count > 0)
+            {
+                newBullet = heartBulletList[0].gameObject;
+                heartBulletList.RemoveAt(0);
+            }
+            else
+            {
+                newBullet = Instantiate(heartBullet);
+                newBullet.transform.SetParent(bulletParent.transform);
+            }
+        }
+        else if (_type == "DIAMOND")
+        {
+            if (diamondBulletList.Count > 0)
+            {
+                newBullet = diamondBulletList[0].gameObject;
+                diamondBulletList.RemoveAt(0);
+            }
+            else
+            {
+                newBullet = Instantiate(diamondBullet);
+                newBullet.transform.SetParent(bulletParent.transform);
+            }
+        }
+        else if (_type == "CLOVER")
+        {
+            if (cloverBulletList.Count > 0)
+            {
+                newBullet = cloverBulletList[0].gameObject;
+                cloverBulletList.RemoveAt(0);
+            }
+            else
+            {
+                newBullet = Instantiate(cloverBullet);
+                newBullet.transform.SetParent(bulletParent.transform);
+            }
+        }
+        else if (_type == "SPADE")
+        {
+            if (spadeBulletList.Count > 0)
+            {
+                newBullet = spadeBulletList[0].gameObject;
+                spadeBulletList.RemoveAt(0);
+            }
+            else
+            {
+                newBullet = Instantiate(spadeBullet);
+                newBullet.transform.SetParent(bulletParent.transform);
+            }
+        }
+        else
+        {
+            return null;
+        }
+
+        return newBullet;
+    }
+
+    public void DisableBullet(GameObject _type)
+    {
+        _type.SetActive(false);
+
+        if (_type.CompareTag("HeartBullet"))
+        {
+            heartBulletList.Add(_type);
+        }
+        else if (_type.CompareTag("DiamondBullet"))
+        {
+            diamondBulletList.Add(_type);
+        }
+        else if (_type.CompareTag("SpadeBullet"))
+        {
+            spadeBulletList.Add(_type);
+        }
+        else if (_type.CompareTag("CloverBullet"))
+        {
+            cloverBulletList.Add(_type);
+        }
+    }
+
     public GameObject GetMonster()
     {
         GameObject newMonster = null;
@@ -93,6 +205,30 @@ public class GameManager : Singleton<GameManager>
             monsterList.Add(newMonster);
             newMonster.SetActive(false);
             newMonster.transform.SetParent(monsterParent.transform);
+
+            var newHeartBullet = Instantiate(heartBullet);
+            heartBulletList.Add(newHeartBullet);
+            newHeartBullet.SetActive(false);
+            newHeartBullet.tag = "HeartBullet";
+            newHeartBullet.transform.SetParent(bulletParent.transform);
+
+            var newSpadeBullet = Instantiate(spadeBullet);
+            spadeBulletList.Add(newSpadeBullet);
+            newSpadeBullet.SetActive(false);
+            newSpadeBullet.tag = "SpadeBullet";
+            newSpadeBullet.transform.SetParent(bulletParent.transform);
+
+            var newDiamondBullet = Instantiate(diamondBullet);
+            diamondBulletList.Add(newDiamondBullet);
+            newDiamondBullet.SetActive(false);
+            newDiamondBullet.tag = "DiamondBullet";
+            newDiamondBullet.transform.SetParent(bulletParent.transform);
+
+            var newCloverBullet = Instantiate(cloverBullet);
+            cloverBulletList.Add(newCloverBullet);
+            newCloverBullet.SetActive(false);
+            newCloverBullet.tag = "CloverBullet";
+            newCloverBullet.transform.SetParent(bulletParent.transform);
         }
     }
 
@@ -106,7 +242,7 @@ public class GameManager : Singleton<GameManager>
             spawnIdx.Add(i - 1);
         }
 
-        CreatedPosition = new bool[spawnPlace.Count];
+        CreatedPosition = new ObscuredBool[spawnPlace.Count];
 
         StartCoroutine(CreateWave());
     }

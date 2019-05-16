@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeStage.AntiCheat.ObscuredTypes;
 
 public class PokerTurret : MonoBehaviour
 {
@@ -15,14 +16,14 @@ public class PokerTurret : MonoBehaviour
 
     public TURRETTYPE turretType = TURRETTYPE.NONE;
 
-    public int power;
-    public int turretLevel;
-    public int turretPositionIndex;
+    public ObscuredInt power;
+    public ObscuredInt turretLevel;
+    public ObscuredInt turretPositionIndex;
 
-    public float timeBetFire;
+    public ObscuredFloat timeBetFire;
     private const float levelUpMinDistance = 1f;
 
-    private GameObject target;
+    public GameObject bullet;
 
     private Vector3 mousePosition;
     private Vector3 offset;
@@ -71,6 +72,7 @@ public class PokerTurret : MonoBehaviour
             {
                 Debug.Log("합체 성공");
                 GameManager.instance.DestroyTurret(this);
+                GameManager.instance.CreatedPosition[turretPositionIndex] = false;
                 pt.turretLevel++;
                 nearTurret.GetComponent<SpriteRenderer>().sprite = GameManager.instance.ChangeCardSprite(turretType.ToString(), turretLevel + 1);
             }
@@ -97,8 +99,6 @@ public class PokerTurret : MonoBehaviour
 
     public void FindEnemy()
     {
-        target = null;
-
         var enemys = GameObject.FindGameObjectsWithTag("Enemy");
         float shortestDistance = Mathf.Infinity;
         GameObject nearestMonster = null;
@@ -116,8 +116,32 @@ public class PokerTurret : MonoBehaviour
 
         if(nearestMonster != null)
         {
-            target = nearestMonster;
-            target.GetComponent<Monster>().OnDamage(power);
+            var bulletPrefab = GameManager.instance.GetBullet(turretType.ToString());
+            var b = bulletPrefab.GetComponent<Bullet>();
+            b.target = nearestMonster;
+            power = (turretLevel * 2) + 1;
+            var gm = GameManager.instance;
+            switch (turretType)
+            {
+                case TURRETTYPE.CLOVER:
+                    b.speed = 8f;
+                    b.damage = power + gm.cloverUpgrade;
+                    break;
+                case TURRETTYPE.DIAMOND:
+                    b.speed = 10f;
+                    b.damage = power + gm.diamondUpgrade;
+                    break;
+                case TURRETTYPE.HEART:
+                    b.speed = 8f;
+                    b.damage = power + gm.heartUpgrade;
+                    break;
+                case TURRETTYPE.SPADE:
+                    b.damage = power + gm.spadeUpgrade;
+                    b.speed = 15f;
+                    break;
+            }
+            bulletPrefab.transform.position = this.transform.position;
+            bulletPrefab.SetActive(true);
         }
     }
 }

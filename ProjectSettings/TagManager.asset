@@ -7,6 +7,10 @@ TagManager:
   - Turret
   - Enemy
   - DeadZone
+  - HeartBullet
+  - SpadeBullet
+  - DiamondBullet
+  - CloverBullet
   layers:
   - Default
   - TransparentFX
