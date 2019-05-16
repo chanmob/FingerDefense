@@ -15,12 +15,16 @@ public class Monster : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         var gm = GameManager.instance;
-        maxHp = gm.currentWave  * ((gm.currentWave / 10) + 1);
+        maxHp = gm.currentWave * ((gm.currentWave / 10) + 1);
         curHp = maxHp;
+        //보스는 제곱
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.CheckWaveIsEnd();
         speed = 1f;
         healthBar.fillAmount = 1;
-        
-        //보스는 제곱
     }
 
     public void OnMouseDown()

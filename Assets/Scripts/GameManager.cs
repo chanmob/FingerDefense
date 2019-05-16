@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CodeStage.AntiCheat.ObscuredTypes;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -22,7 +23,8 @@ public class GameManager : Singleton<GameManager>
     public ObscuredInt diamondUpgrade = 0;
     [HideInInspector]
     public ObscuredInt cloverUpgrade = 0;
-
+    [HideInInspector]
+    public ObscuredInt waveCount;
 
     [HideInInspector]
     public ObscuredBool[] CreatedPosition;
@@ -47,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     private List<GameObject> diamondBulletList = new List<GameObject>();
     private List<GameObject> cloverBulletList = new List<GameObject>();
 
+    public Text waveText;
 
     public void TurretCreated()
     {
@@ -251,9 +254,19 @@ public class GameManager : Singleton<GameManager>
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            waveCount = 0;
+            int checkTime = 5;
+            for(int i = 0; i < 5; i++)
+            {
+                waveText.text = "다음 웨이브 까지 " + checkTime.ToString();
+
+                yield return new WaitForSeconds(1f);
+
+                checkTime--;                
+            }
 
             currentWave++;
+            waveText.text = "현재 웨이브 : " + currentWave.ToString();
 
             for (int i = 0; i < currentWave; i++)
             {
@@ -264,6 +277,8 @@ public class GameManager : Singleton<GameManager>
                 m.transform.position = new Vector3(x, 3.2f, 0);
                 m.SetActive(true);
             }
+
+            yield return new WaitWaveEnd();
         }
     }
 
@@ -289,5 +304,13 @@ public class GameManager : Singleton<GameManager>
         {
             return null;
         }
+    }
+
+    public void CheckWaveIsEnd()
+    {
+        waveCount++;
+
+        if (waveCount == currentWave)
+            EventManager.instance.waitForWaveToEndHandler();
     }
 }
