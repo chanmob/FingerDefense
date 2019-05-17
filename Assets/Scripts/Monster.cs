@@ -8,7 +8,10 @@ public class Monster : MonoBehaviour, IDamageable
 {
     public ObscuredInt maxHp;
     public ObscuredInt curHp;
+    public ObscuredFloat curSpeed;
     public ObscuredFloat speed = 1f;
+
+    public ObscuredBool isFreeze = false;
 
     public Image healthBar;
 
@@ -17,6 +20,7 @@ public class Monster : MonoBehaviour, IDamageable
         var gm = GameManager.instance;
         maxHp = gm.currentWave * ((gm.currentWave / 10) + 1);
         curHp = maxHp;
+        curSpeed = speed;
         //보스는 제곱
     }
 
@@ -39,13 +43,15 @@ public class Monster : MonoBehaviour, IDamageable
 
         if(curHp <= 0)
         {
+            GameManager.instance.money += 100;
+            GameManager.instance.MoneyTextRefresh();
             GameManager.instance.DisableMonster(this.gameObject);
         }
     }
 
     private void Update()
     {
-        this.transform.Translate(Vector2.down * speed * Time.deltaTime);
+        this.transform.Translate(Vector2.down * curSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,5 +60,24 @@ public class Monster : MonoBehaviour, IDamageable
         {
             GameManager.instance.DisableMonster(this.gameObject);
         }
+    }
+
+    public void Freeze(float _slowAmount)
+    {
+        if (isFreeze)
+            return;
+
+        StartCoroutine(FreezeCoroutine(_slowAmount));
+    }
+
+    private IEnumerator FreezeCoroutine(float _slowAmount)
+    {
+        isFreeze = true;
+        curSpeed = curSpeed * (1 - _slowAmount);
+
+        yield return new WaitForSeconds(1f);
+
+        curSpeed = speed;
+        isFreeze = false;
     }
 }

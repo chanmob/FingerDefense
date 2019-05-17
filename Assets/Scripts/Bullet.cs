@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public GameObject target;
     public ObscuredFloat speed;
     public ObscuredInt damage;
+    public string type;
 
     private void OnDisable()
     {
@@ -33,6 +34,22 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject == target)
         {
+            switch (type)
+            {
+                case "HEART":
+
+                    break;
+                case "DIAMOND":
+
+                    break;
+                case "CLOVER":
+                    collision.GetComponent<Monster>().Freeze((GameManager.instance.cloverUpgrade * 0.1f) + 0.1f);
+                    break;
+                case "SPADE":
+
+                    break;
+            }
+
             collision.GetComponent<IDamageable>().OnDamage(damage);
             GameManager.instance.DisableBullet(this.gameObject);
         }

@@ -62,6 +62,7 @@ public class GameManager : Singleton<GameManager>
 
         newTurret.transform.position = new Vector2(pos.x, pos.y + 0.05f);
         newTurret.GetComponent<PokerTurret>().turretPositionIndex = idx;
+        newTurret.GetComponent<Animator>().SetTrigger("Created");
     }
 
     private int RandomSpawnIndex(List<int> _source)

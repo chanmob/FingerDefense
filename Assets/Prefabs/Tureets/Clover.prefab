@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 90165313414824152}
   - component: {fileID: 7978149762021132379}
   - component: {fileID: 5441993643628532174}
+  - component: {fileID: 9130417640980892433}
   m_Layer: 0
   m_Name: Clover
   m_TagString: Turret
@@ -120,8 +121,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretType: 3
-  power: 1
-  turretLevel: 0
-  turretPositionIndex: 0
-  timeBetFire: 0
+  power:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
+  turretLevel:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
+  turretPositionIndex:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
+  timeBetFire:
+    migratedVersion: 
+    currentCryptoKey: 230887
+    hiddenValue: 8717287
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
   bullet: {fileID: 7255852102525965685, guid: 3150487d2ead788468822d2fa128c138, type: 3}
+--- !u!95 &9130417640980892433
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5903903707080726392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c396de6e935cdb4b9cee5b4fa81df0e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

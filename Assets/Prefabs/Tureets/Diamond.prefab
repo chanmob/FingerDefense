@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3296034312664430836}
   - component: {fileID: 8718433432050786281}
   - component: {fileID: 3479111957069862746}
+  - component: {fileID: 5664240209225982632}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Turret
@@ -120,8 +121,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretType: 4
-  power: 1
-  turretLevel: 0
-  turretPositionIndex: 0
-  timeBetFire: 0
+  power:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
+  turretLevel:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
+  turretPositionIndex:
+    currentCryptoKey: 444444
+    hiddenValue: 444444
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
+  timeBetFire:
+    migratedVersion: 
+    currentCryptoKey: 230887
+    hiddenValue: 8717287
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 0
   bullet: {fileID: 7100888057755760283, guid: ebaf8bc99779c954683a3514a72a0983, type: 3}
+--- !u!95 &5664240209225982632
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3080116188467104084}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c396de6e935cdb4b9cee5b4fa81df0e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

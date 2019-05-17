@@ -119,6 +119,10 @@ public class PokerTurret : MonoBehaviour
             var bulletPrefab = GameManager.instance.GetBullet(turretType.ToString());
             var b = bulletPrefab.GetComponent<Bullet>();
             b.target = nearestMonster;
+            if(string.IsNullOrEmpty(b.type))
+            {
+                b.type = turretType.ToString();
+            }
             power = (turretLevel * 2) + 1;
             var gm = GameManager.instance;
             switch (turretType)
