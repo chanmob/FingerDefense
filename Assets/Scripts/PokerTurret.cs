@@ -94,7 +94,7 @@ public class PokerTurret : MonoBehaviour
     private void Start()
     {
         pos = this.transform.position;
-        InvokeRepeating("FindEnemy", 0f, 0.5f);
+        InvokeRepeating("FindEnemy", 0f, timeBetFire);
     }
 
     public void FindEnemy()
@@ -136,12 +136,12 @@ public class PokerTurret : MonoBehaviour
                     b.damage = power + gm.diamondUpgrade;
                     break;
                 case TURRETTYPE.HEART:
-                    b.speed = 8f;
+                    b.speed = 15f;
                     b.damage = power + gm.heartUpgrade;
                     break;
                 case TURRETTYPE.SPADE:
                     b.damage = power + gm.spadeUpgrade;
-                    b.speed = 15f;
+                    b.speed = 8f;
                     break;
             }
             bulletPrefab.transform.position = this.transform.position;

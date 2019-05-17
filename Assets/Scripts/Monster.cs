@@ -10,6 +10,8 @@ public class Monster : MonoBehaviour, IDamageable
     public ObscuredInt curHp;
     public ObscuredFloat curSpeed;
     public ObscuredFloat speed = 1f;
+    private ObscuredFloat lastFreezeTime;
+    private float freezeTime;
 
     public ObscuredBool isFreeze = false;
 
@@ -51,6 +53,12 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if(isFreeze && Time.time >= lastFreezeTime + freezeTime)
+        {
+            curSpeed = speed;
+            isFreeze = false;
+        }
+
         this.transform.Translate(Vector2.down * curSpeed * Time.deltaTime);
     }
 
@@ -64,20 +72,10 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void Freeze(float _slowAmount)
     {
-        if (isFreeze)
-            return;
-
-        StartCoroutine(FreezeCoroutine(_slowAmount));
-    }
-
-    private IEnumerator FreezeCoroutine(float _slowAmount)
-    {
         isFreeze = true;
+
+        lastFreezeTime = Time.time;
+
         curSpeed = curSpeed * (1 - _slowAmount);
-
-        yield return new WaitForSeconds(1f);
-
-        curSpeed = speed;
-        isFreeze = false;
     }
 }

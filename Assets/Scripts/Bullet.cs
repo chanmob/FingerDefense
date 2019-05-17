@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public ObscuredInt damage;
     public string type;
 
+    public GameObject diaBulletEffect;
+
     private void OnDisable()
     {
         target = null;
@@ -40,7 +42,9 @@ public class Bullet : MonoBehaviour
 
                     break;
                 case "DIAMOND":
-
+                    var diaBullet = Instantiate(diaBulletEffect, collision.transform.position ,Quaternion.identity);
+                    diaBullet.transform.localScale = new Vector3(2f + GameManager.instance.diamondUpgrade * 0.25f, 2f + GameManager.instance.diamondUpgrade * 0.25f, 1);
+                    diaBullet.GetComponent<OnEnableDestroy>().damage = damage;
                     break;
                 case "CLOVER":
                     collision.GetComponent<Monster>().Freeze((GameManager.instance.cloverUpgrade * 0.1f) + 0.1f);
