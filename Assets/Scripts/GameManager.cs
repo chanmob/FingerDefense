@@ -25,8 +25,8 @@ public class GameManager : Singleton<GameManager>
     public ObscuredInt cloverUpgrade = 0;
     [HideInInspector]
     public ObscuredInt waveCount;
-    [HideInInspector]
-    public ObscuredInt money = 100;
+    //[HideInInspector]
+    public ObscuredInt money = 0;
 
     [HideInInspector]
     public ObscuredBool[] CreatedPosition;
@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
     public Sprite[] cloverCards;
     public Sprite[] diamondCards;
 
+    public GameObject bossMonster;
     public GameObject monsterParent;
     public GameObject bulletParent;
     public GameObject spawnPlaceParent;
@@ -272,14 +273,24 @@ public class GameManager : Singleton<GameManager>
             currentWave++;
             waveText.text = "현재 웨이브 : " + currentWave.ToString();
 
-            for (int i = 0; i < currentWave; i++)
+            if(currentWave % 10 == 0)
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
 
-                var m = GetMonster();
-                float x = Random.Range(-1.3f, 1.3f);
-                m.transform.position = new Vector3(x, 3.2f, 0);
-                m.SetActive(true);
+                var bm = Instantiate(bossMonster);
+                bm.transform.position = new Vector2(0, 3f);
+            }
+            else
+            {
+                for (int i = 0; i < currentWave; i++)
+                {
+                    yield return new WaitForSeconds(0.5f);
+
+                    var m = GetMonster();
+                    float x = Random.Range(-1.3f, 1.3f);
+                    m.transform.position = new Vector3(x, 3.2f, 0);
+                    m.SetActive(true);
+                }
             }
 
             yield return new WaitWaveEnd();

@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 221050275}
   - component: {fileID: 221050274}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,9 +507,9 @@ MonoBehaviour:
     fakeValueActive: 0
   money:
     currentCryptoKey: 444444
-    hiddenValue: 444536
+    hiddenValue: 444444
     inited: 1
-    fakeValue: 100
+    fakeValue: 0
     fakeValueActive: 1
   CreatedPosition: []
   spadeCards:
@@ -556,6 +556,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ca00727f7255eda4dab6ea50a305439c, type: 3}
   - {fileID: 21300000, guid: 593b760a93ca5274589b3872b9af2a0b, type: 3}
   - {fileID: 21300000, guid: c16c4203c5527134c8106656c2175730, type: 3}
+  bossMonster: {fileID: 5384370861349468775, guid: 5eafa7df05b64fc4f810449b0cbf940f,
+    type: 3}
   monsterParent: {fileID: 391488145}
   bulletParent: {fileID: 1876208192}
   spawnPlaceParent: {fileID: 370899633}
@@ -746,7 +748,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 301700848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420126021}
+        m_MethodName: SpadeUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &301700848
@@ -1123,6 +1136,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradePanel: {fileID: 952385748}
   questPanel: {fileID: 2078155261}
+  turretCostText: {fileID: 416233056}
+  fingerTexts:
+  - {fileID: 1056620894}
+  - {fileID: 221050274}
+  heartTexts:
+  - {fileID: 1098652964}
+  - {fileID: 1952225303}
+  spadeTexts:
+  - {fileID: 787835097}
+  - {fileID: 1442605685}
+  cloverTexts:
+  - {fileID: 217920783}
+  - {fileID: 1617557689}
+  diamondTexts:
+  - {fileID: 465649552}
+  - {fileID: 1480505427}
 --- !u!4 &420126022
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,7 +1257,7 @@ GameObject:
   - component: {fileID: 465649553}
   - component: {fileID: 465649552}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1466,7 +1495,7 @@ GameObject:
   - component: {fileID: 504049820}
   - component: {fileID: 504049819}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: BuyTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2704,7 +2733,7 @@ GameObject:
   - component: {fileID: 1056620895}
   - component: {fileID: 1056620894}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3727,7 +3756,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1304499355}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420126021}
+        m_MethodName: FingerUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1304499355
@@ -3837,7 +3877,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 0
 --- !u!222 &1324618998
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4332,7 +4372,7 @@ GameObject:
   - component: {fileID: 1480505428}
   - component: {fileID: 1480505427}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5244,7 +5284,7 @@ GameObject:
   - component: {fileID: 1814392388}
   - component: {fileID: 1814392387}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5373,7 +5413,7 @@ GameObject:
   - component: {fileID: 1822805528}
   - component: {fileID: 1822805527}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Quest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5678,7 +5718,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1902629487}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420126021}
+        m_MethodName: DiamondUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1902629487
@@ -6212,7 +6263,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1993087250}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420126021}
+        m_MethodName: CloverUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1993087250
@@ -6852,7 +6914,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2117054624}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420126021}
+        m_MethodName: HeartUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2117054624
@@ -6905,7 +6978,7 @@ GameObject:
   - component: {fileID: 2139376664}
   - component: {fileID: 2139376663}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: SellTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

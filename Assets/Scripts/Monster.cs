@@ -8,29 +8,52 @@ public class Monster : MonoBehaviour, IDamageable
 {
     public ObscuredInt maxHp;
     public ObscuredInt curHp;
+    public ObscuredInt shockSpeed = 1;
     public ObscuredFloat curSpeed;
     public ObscuredFloat speed = 1f;
     private ObscuredFloat lastFreezeTime;
-    private float freezeTime;
+    private float freezeTime = 1f;
 
     public ObscuredBool isFreeze = false;
-
+    public ObscuredBool isShock = false;
+    public ObscuredBool isDie = false;
+    
     public Image healthBar;
+
+    public IEnumerator shockCoroutine;
 
     private void OnEnable()
     {
-        var gm = GameManager.instance;
-        maxHp = gm.currentWave * ((gm.currentWave / 10) + 1);
-        curHp = maxHp;
-        curSpeed = speed;
-        //보스는 제곱
+        MonsterHpReset();
     }
 
     private void OnDisable()
     {
+        MonsterStatusReset();
+    }
+
+    public virtual void MonsterHpReset()
+    {
+        isDie = false;
+        var gm = GameManager.instance;
+        maxHp = gm.currentWave * ((gm.currentWave / 10) + 1);
+        curHp = maxHp;
+        curSpeed = speed;
+    }
+
+    public virtual void MonsterStatusReset()
+    {
         GameManager.instance.CheckWaveIsEnd();
         speed = 1f;
         healthBar.fillAmount = 1;
+        shockSpeed = 1;
+        isShock = false;
+        isFreeze = false;
+        if(shockCoroutine != null)
+        {
+            StopCoroutine(shockCoroutine);
+            shockCoroutine = null;
+        }
     }
 
     public void OnMouseDown()
@@ -40,15 +63,28 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void OnDamage(int _damage)
     {
+        if (isDie)
+            return;
+
         curHp -= _damage;
         healthBar.fillAmount = (float)curHp / (float)maxHp;
 
         if(curHp <= 0)
         {
-            GameManager.instance.money += 100;
-            GameManager.instance.MoneyTextRefresh();
-            GameManager.instance.DisableMonster(this.gameObject);
+            MonsterDie();
         }
+    }
+
+    public virtual void MonsterDie()
+    {
+        if (isDie)
+            return;
+
+        isDie = true;
+        Debug.Log(GameManager.instance.currentWave + " - 죽어따");
+        GameManager.instance.money += 100;
+        GameManager.instance.MoneyTextRefresh();
+        GameManager.instance.DisableMonster(this.gameObject);
     }
 
     private void Update()
@@ -59,15 +95,25 @@ public class Monster : MonoBehaviour, IDamageable
             isFreeze = false;
         }
 
-        this.transform.Translate(Vector2.down * curSpeed * Time.deltaTime);
+        if(curSpeed <= speed * 0.5f)
+        {
+            curSpeed = speed * 0.5f;
+        }
+
+        this.transform.Translate(Vector2.down * curSpeed * Time.deltaTime * shockSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DeadZone"))
         {
-            GameManager.instance.DisableMonster(this.gameObject);
+            MonsterArriveDeadZone();
         }
+    }
+
+    public virtual void MonsterArriveDeadZone()
+    {
+        GameManager.instance.DisableMonster(this.gameObject);
     }
 
     public void Freeze(float _slowAmount)
@@ -77,5 +123,27 @@ public class Monster : MonoBehaviour, IDamageable
         lastFreezeTime = Time.time;
 
         curSpeed = curSpeed * (1 - _slowAmount);
+    }
+
+    public void Shock()
+    {
+        if (isShock || this.gameObject.activeSelf == false)
+            return;
+
+        shockCoroutine = ShockCoroutine();
+        StartCoroutine(shockCoroutine);
+    }
+
+    private IEnumerator ShockCoroutine()
+    {
+        isShock = true;
+        shockSpeed = 0;
+
+        yield return new WaitForSeconds(0.3f);
+
+        shockSpeed = 1;
+
+        yield return new WaitForSeconds(0.6f);
+        isShock = false;
     }
 }

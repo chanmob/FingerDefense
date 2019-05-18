@@ -7,6 +7,7 @@ public class OnEnableDestroy : MonoBehaviour
 {
     private SpriteRenderer sp;
     public ObscuredInt damage;
+    public GameObject target;
 
     private void Start()
     {
@@ -20,6 +21,9 @@ public class OnEnableDestroy : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            if (collision == target)
+                return;
+
             collision.GetComponent<IDamageable>().OnDamage(damage);
         }
     }

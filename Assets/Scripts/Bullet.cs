@@ -24,10 +24,16 @@ public class Bullet : MonoBehaviour
         if(target != null)
         {
             this.transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+
+            if (target.activeSelf == false)
+            {
+                GameManager.instance.DisableBullet(this.gameObject);
+            }
         }
 
-        if(target.activeSelf == false)
+        else
         {
+            Debug.Log("타겟을 잃었어");
             GameManager.instance.DisableBullet(this.gameObject);
         }
     }
@@ -39,18 +45,19 @@ public class Bullet : MonoBehaviour
             switch (type)
             {
                 case "HEART":
-
                     break;
                 case "DIAMOND":
                     var diaBullet = Instantiate(diaBulletEffect, collision.transform.position ,Quaternion.identity);
                     diaBullet.transform.localScale = new Vector3(2f + GameManager.instance.diamondUpgrade * 0.25f, 2f + GameManager.instance.diamondUpgrade * 0.25f, 1);
-                    diaBullet.GetComponent<OnEnableDestroy>().damage = damage;
+                    var effect = diaBullet.GetComponent<OnEnableDestroy>();
+                    effect.damage = damage;
+                    effect.target = collision.gameObject;
                     break;
                 case "CLOVER":
                     collision.GetComponent<Monster>().Freeze((GameManager.instance.cloverUpgrade * 0.1f) + 0.1f);
                     break;
                 case "SPADE":
-
+                    collision.GetComponent<Monster>().Shock();
                     break;
             }
 

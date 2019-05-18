@@ -74,7 +74,25 @@ public class PokerTurret : MonoBehaviour
                 GameManager.instance.DestroyTurret(this);
                 GameManager.instance.CreatedPosition[turretPositionIndex] = false;
                 pt.turretLevel++;
-                nearTurret.GetComponent<SpriteRenderer>().sprite = GameManager.instance.ChangeCardSprite(turretType.ToString(), turretLevel + 1);
+                int randomTurret = Random.Range(0, GameManager.instance.turrets.Length);
+
+                switch (randomTurret)
+                {
+                    case 0:
+                        pt.turretType = TURRETTYPE.CLOVER;
+                        break;
+                    case 1:
+                        pt.turretType = TURRETTYPE.DIAMOND;
+                        break;
+                    case 2:
+                        pt.turretType = TURRETTYPE.HEART;
+                        break;
+                    case 3:
+                        pt.turretType = TURRETTYPE.SPADE;
+                        break;
+                }
+
+                nearTurret.GetComponent<SpriteRenderer>().sprite = GameManager.instance.ChangeCardSprite(pt.turretType.ToString(), turretLevel + 1);
             }
             else
             {

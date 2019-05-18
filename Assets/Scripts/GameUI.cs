@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using CodeStage.AntiCheat.ObscuredTypes;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
@@ -12,8 +14,21 @@ public class GameUI : MonoBehaviour
     private bool questPanelOn = false;
 
     private int buyTurretCount;
+    private ObscuredInt fingerUpgradeCost = 100;
+    private ObscuredInt heartUpgradeCost = 100;
+    private ObscuredInt spadeUpgradeCost = 100;
+    private ObscuredInt cloverUpgradeCost = 100;
+    private ObscuredInt diamondUpgradeCost = 100;
+
 
     private GameManager gm;
+
+    public Text turretCostText;
+    public Text[] fingerTexts;
+    public Text[] heartTexts;
+    public Text[] spadeTexts;
+    public Text[] cloverTexts;
+    public Text[] diamondTexts;
 
     private void Start()
     {
@@ -28,6 +43,8 @@ public class GameUI : MonoBehaviour
             gm.MoneyTextRefresh();
             gm.TurretCreated();
             buyTurretCount++;
+
+            turretCostText.text = "터렛구매\n" + (buyTurretCount * 100 + 100);
         }
     }
 
@@ -60,163 +77,174 @@ public class GameUI : MonoBehaviour
     {
         if (gm.touchDamage == 1)
         {
-            if (gm.money < 100)
+            if (gm.money < fingerUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100;
+                gm.money -= fingerUpgradeCost;
             }
         }
 
         else
         {
-            if (gm.money < 100 + (100 * gm.touchDamage))
+            if (gm.money < fingerUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100 + (100 * gm.touchDamage);
+                gm.money -= fingerUpgradeCost;
             }
         }
 
         gm.touchDamage++;
-
         gm.MoneyTextRefresh();
+        fingerUpgradeCost += 100 + (100 * gm.touchDamage);
+        fingerTexts[0].text = "Lv." + gm.touchDamage;
+        fingerTexts[1].text = fingerUpgradeCost.ToString();
     }
 
     public void HeartUpgrade()
     {
         if(gm.heartUpgrade == 0)
         {
-            if(gm.money < 100)
+            if(gm.money < heartUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100;
+                gm.money -= heartUpgradeCost;
             }
         }
 
         else
         {
-            if (gm.money < 100 + (100 * gm.heartUpgrade))
+            if (gm.money < heartUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100 + (100 * gm.heartUpgrade);
+                gm.money -= heartUpgradeCost;
             }
         }
 
         gm.heartUpgrade++;
-
         gm.MoneyTextRefresh();
+        heartUpgradeCost += 100 + (100 * gm.heartUpgrade + 1);
+        heartTexts[0].text = "Lv." + gm.heartUpgrade + 1;
+        heartTexts[1].text = heartUpgradeCost.ToString();
     }
 
     public void SpadeUpgrade()
     {
         if (gm.spadeUpgrade == 0)
         {
-            if (gm.money < 100)
+            if (gm.money < spadeUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100;
+                gm.money -= spadeUpgradeCost;
             }
         }
 
         else
         {
-            if (gm.money < 100 + (100 * gm.spadeUpgrade))
+            if (gm.money < spadeUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100 + (100 * gm.spadeUpgrade);
+                gm.money -= spadeUpgradeCost;
             }
         }
 
         gm.spadeUpgrade++;
-
         gm.MoneyTextRefresh();
+        spadeUpgradeCost += 100 + (100 * gm.spadeUpgrade + 1);
+        spadeTexts[0].text = "Lv." + gm.spadeUpgrade + 1;
+        spadeTexts[1].text = spadeUpgradeCost.ToString();
     }
 
     public void CloverUpgrade()
     {
         if (gm.cloverUpgrade == 0)
         {
-            if (gm.money < 100)
+            if (gm.money < cloverUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100;
+                gm.money -= cloverUpgradeCost;
             }
         }
 
         else
         {
-            if (gm.money < 100 + (100 * gm.cloverUpgrade))
+            if (gm.money < cloverUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100 + (100 * gm.cloverUpgrade);
+                gm.money -= cloverUpgradeCost;
             }
         }
 
         gm.cloverUpgrade++;
-
         gm.MoneyTextRefresh();
+        cloverUpgradeCost += 100 + (100 * gm.cloverUpgrade + 1);
+        cloverTexts[0].text = "Lv." + gm.cloverUpgrade + 1;
+        cloverTexts[1].text = cloverUpgradeCost.ToString();
     }
 
     public void DiamondUpgrade()
     {
         if (gm.diamondUpgrade == 0)
         {
-            if (gm.money < 100)
+            if (gm.money < diamondUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100;
+                gm.money -= diamondUpgradeCost;
             }
         }
 
         else
         {
-            if (gm.money < 100 + (100 * gm.diamondUpgrade))
+            if (gm.money < diamondUpgradeCost)
             {
                 return;
             }
 
             else
             {
-                gm.money -= 100 + (100 * gm.diamondUpgrade);
+                gm.money -= diamondUpgradeCost;
             }
         }
 
         gm.diamondUpgrade++;
         gm.MoneyTextRefresh();
+        diamondUpgradeCost += 100 + (100 * gm.diamondUpgrade + 1);
+        diamondTexts[0].text = "Lv." + gm.diamondUpgrade + 1;
+        diamondTexts[1].text = diamondUpgradeCost.ToString();
     }
 }
