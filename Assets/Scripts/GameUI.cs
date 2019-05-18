@@ -103,8 +103,8 @@ public class GameUI : MonoBehaviour
 
         gm.touchDamage++;
         gm.MoneyTextRefresh();
-        fingerUpgradeCost += 100 + (100 * gm.touchDamage);
-        fingerTexts[0].text = "Lv." + gm.touchDamage;
+        fingerUpgradeCost += 100 * gm.touchDamage;
+        fingerTexts[0].text = "Lv." + gm.touchDamage.ToString();
         fingerTexts[1].text = fingerUpgradeCost.ToString();
     }
 
@@ -138,8 +138,8 @@ public class GameUI : MonoBehaviour
 
         gm.heartUpgrade++;
         gm.MoneyTextRefresh();
-        heartUpgradeCost += 100 + (100 * gm.heartUpgrade + 1);
-        heartTexts[0].text = "Lv." + gm.heartUpgrade + 1;
+        heartUpgradeCost += 100 * (gm.heartUpgrade + 1);
+        heartTexts[0].text = "Lv." + (gm.heartUpgrade + 1).ToString();
         heartTexts[1].text = heartUpgradeCost.ToString();
     }
 
@@ -173,8 +173,8 @@ public class GameUI : MonoBehaviour
 
         gm.spadeUpgrade++;
         gm.MoneyTextRefresh();
-        spadeUpgradeCost += 100 + (100 * gm.spadeUpgrade + 1);
-        spadeTexts[0].text = "Lv." + gm.spadeUpgrade + 1;
+        spadeUpgradeCost += 100 * (gm.spadeUpgrade + 1);
+        spadeTexts[0].text = "Lv." + (gm.spadeUpgrade + 1).ToString();
         spadeTexts[1].text = spadeUpgradeCost.ToString();
     }
 
@@ -208,8 +208,8 @@ public class GameUI : MonoBehaviour
 
         gm.cloverUpgrade++;
         gm.MoneyTextRefresh();
-        cloverUpgradeCost += 100 + (100 * gm.cloverUpgrade + 1);
-        cloverTexts[0].text = "Lv." + gm.cloverUpgrade + 1;
+        cloverUpgradeCost += 100 * (gm.cloverUpgrade + 1);
+        cloverTexts[0].text = "Lv." + (gm.cloverUpgrade + 1).ToString();
         cloverTexts[1].text = cloverUpgradeCost.ToString();
     }
 
@@ -243,8 +243,8 @@ public class GameUI : MonoBehaviour
 
         gm.diamondUpgrade++;
         gm.MoneyTextRefresh();
-        diamondUpgradeCost += 100 + (100 * gm.diamondUpgrade + 1);
-        diamondTexts[0].text = "Lv." + gm.diamondUpgrade + 1;
+        diamondUpgradeCost += 100 * (gm.diamondUpgrade + 1);
+        diamondTexts[0].text = "Lv." + (gm.diamondUpgrade + 1).ToString();
         diamondTexts[1].text = diamondUpgradeCost.ToString();
     }
 }
