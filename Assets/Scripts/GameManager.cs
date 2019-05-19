@@ -26,6 +26,8 @@ public class GameManager : Singleton<GameManager>
     public ObscuredInt cloverUpgrade = 0;
     [HideInInspector]
     public ObscuredInt waveCount;
+    [HideInInspector]
+    public ObscuredInt buyTurretCount = 0;
     //[HideInInspector]
     public ObscuredInt money = 0;
 
@@ -37,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     public Sprite[] heartCards;
     public Sprite[] cloverCards;
     public Sprite[] diamondCards;
+    public Sprite noHpSprite;
 
     public GameObject bossMonster;
     public GameObject monsterParent;
@@ -56,6 +59,8 @@ public class GameManager : Singleton<GameManager>
 
     public Text waveText;
     public Text MoneyText;
+
+    public Image[] hpImage;
 
     public void TurretCreated()
     {
@@ -353,6 +358,22 @@ public class GameManager : Singleton<GameManager>
         for (int i = 0; i < spawnPlace.Count; i++)
         {
             spawnPlace[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        }
+    }
+
+    public void CheckEndGame()
+    {
+        if (currenthp <= 0)
+            return;
+
+        for(int i = 4; i >= currenthp; i--)
+        {
+            hpImage[i].sprite = noHpSprite;
+        }
+
+        if(currenthp <= 0)
+        {
+            Debug.Log("게임 종료");
         }
     }
 }

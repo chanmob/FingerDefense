@@ -82,7 +82,6 @@ public class Monster : MonoBehaviour, IDamageable
             return;
 
         isDie = true;
-        Debug.Log(GameManager.instance.currentWave + " - 죽어따");
         GameManager.instance.money += 100;
         GameManager.instance.MoneyTextRefresh();
         GameManager.instance.DisableMonster(this.gameObject);
@@ -114,6 +113,8 @@ public class Monster : MonoBehaviour, IDamageable
 
     public virtual void MonsterArriveDeadZone()
     {
+        GameManager.instance.currenthp--;
+        GameManager.instance.CheckEndGame();
         GameManager.instance.DisableMonster(this.gameObject);
     }
 

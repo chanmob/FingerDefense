@@ -13,13 +13,13 @@ public class GameUI : MonoBehaviour
     private bool upgradePanelOn = false;
     private bool questPanelOn = false;
 
-    private int buyTurretCount;
     private ObscuredInt fingerUpgradeCost = 100;
     private ObscuredInt heartUpgradeCost = 100;
     private ObscuredInt spadeUpgradeCost = 100;
     private ObscuredInt cloverUpgradeCost = 100;
     private ObscuredInt diamondUpgradeCost = 100;
 
+    private readonly float[] questCoolTime = new float[5] { 60f, 120f, 180f, 240f, 300f };
 
     private GameManager gm;
 
@@ -29,6 +29,8 @@ public class GameUI : MonoBehaviour
     public Text[] spadeTexts;
     public Text[] cloverTexts;
     public Text[] diamondTexts;
+
+    public Image[] QuestBars;
 
     private void Start()
     {
@@ -42,14 +44,14 @@ public class GameUI : MonoBehaviour
             return;
         }
 
-        if (gm.money >= (buyTurretCount * 100 + 100))
+        if (gm.money >= (gm.buyTurretCount * 100 + 100))
         {
-            gm.money -= (buyTurretCount * 100 + 100);
+            gm.money -= (gm.buyTurretCount * 100 + 100);
             gm.MoneyTextRefresh();
             gm.TurretCreated();
-            buyTurretCount++;
+            gm.buyTurretCount++;
 
-            turretCostText.text = "터렛구매\n" + (buyTurretCount * 100 + 100);
+            turretCostText.text = "터렛구매\n" + (gm.buyTurretCount * 100 + 100);
         }
     }
 
@@ -262,5 +264,27 @@ public class GameUI : MonoBehaviour
         diamondUpgradeCost += 100 * (gm.diamondUpgrade + 1);
         diamondTexts[0].text = "Lv." + (gm.diamondUpgrade + 1).ToString();
         diamondTexts[1].text = diamondUpgradeCost.ToString();
+    }
+
+    public void StartQuest(int _idx)
+    {
+        StartCoroutine(QuestCoolTime(_idx, questCoolTime[_idx]));
+    }
+
+    private IEnumerator QuestCoolTime(int _idx, float _delay)
+    {
+        QuestBars[_idx].fillAmount = 0;
+        float time = 0f;
+
+        while(time <= _delay)
+        {
+            time += Time.deltaTime;
+
+            QuestBars[_idx].fillAmount = time / _delay;
+
+            yield return null;
+        }
+
+        QuestBars[_idx].fillAmount = 1;
     }
 }

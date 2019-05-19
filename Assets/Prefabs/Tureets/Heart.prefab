@@ -148,14 +148,14 @@ MonoBehaviour:
   timeBetFire:
     migratedVersion: 
     currentCryptoKey: 230887
-    hiddenValue: 1065681895
+    hiddenValue: 1042061949
     hiddenValueOldByte4:
       b1: 0
       b2: 0
       b3: 0
       b4: 0
     inited: 1
-    fakeValue: 0.5
+    fakeValue: 0.3
     fakeValueActive: 1
   bullet: {fileID: 2447117130216454594, guid: 77f851dcf42e4864690621803d75a660, type: 3}
 --- !u!95 &1594234294567121642

@@ -27,6 +27,8 @@ public class BossMonster : Monster
 
     public override void MonsterArriveDeadZone()
     {
+        GameManager.instance.currenthp--;
+        GameManager.instance.CheckEndGame();
         Destroy(this.gameObject);
     }
 }
