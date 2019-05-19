@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -34,6 +35,7 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector]
     public ObscuredBool[] createdPosition;
     public ObscuredBool waitForSale = false;
+    private bool gameOver = false;
 
     public Sprite[] spadeCards;
     public Sprite[] heartCards;
@@ -59,8 +61,14 @@ public class GameManager : Singleton<GameManager>
 
     public Text waveText;
     public Text MoneyText;
+    public Text resultWaveText;
+    public Text bestWaveText;
 
     public Image[] hpImage;
+
+    public AudioSource coinAudio;
+
+    public RectTransform resultPanel;
 
     public void TurretCreated()
     {
@@ -363,7 +371,7 @@ public class GameManager : Singleton<GameManager>
 
     public void CheckEndGame()
     {
-        if (currenthp <= 0)
+        if (gameOver)
             return;
 
         for(int i = 4; i >= currenthp; i--)
@@ -374,6 +382,43 @@ public class GameManager : Singleton<GameManager>
         if(currenthp <= 0)
         {
             Debug.Log("게임 종료");
+            gameOver = true;
+            StopAllCoroutines();
+
+            var enemys = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(var enemy in enemys)
+            {
+                Destroy(enemy);
+            }
+
+            int bestScore = 0;
+
+            if (ObscuredPrefs.HasKey("BESTSCORE"))
+            {
+                bestScore = ObscuredPrefs.GetInt("BESTSCORE");
+
+                if(currentWave > bestScore)
+                {
+                    ObscuredPrefs.SetInt("BESTSCORE", currentWave);
+                }
+            }
+            else
+            {
+                bestScore = currentWave;
+                ObscuredPrefs.SetInt("BESTSCORE", currentWave);
+            }
+
+            StartCoroutine(CountingWave(resultWaveText));
+            //resultPanel.transform.Find("CurretWave").GetComponent<Text>().text = "이번 웨이브 : " + currentWave;
+            bestWaveText.text = "최고 웨이브 : " + bestScore;
+            UIDoTween.instance.UITweenY(resultPanel, 0, 1f, Ease.InCubic);
         }
+    }
+
+    private IEnumerator CountingWave(Text _text)
+    {
+        yield return new WaitForSeconds(1f);
+
+        NumberCounting.instance.StartCount(_text, 0, currentWave, 1f);
     }
 }

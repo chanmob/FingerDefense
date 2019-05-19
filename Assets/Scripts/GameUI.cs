@@ -23,6 +23,8 @@ public class GameUI : MonoBehaviour
 
     private GameManager gm;
 
+    public GameObject questMonster;
+
     public Text turretCostText;
     public Text[] fingerTexts;
     public Text[] heartTexts;
@@ -269,6 +271,12 @@ public class GameUI : MonoBehaviour
     public void StartQuest(int _idx)
     {
         StartCoroutine(QuestCoolTime(_idx, questCoolTime[_idx]));
+
+        var qm = Instantiate(questMonster).GetComponent<QuestMonster>();
+
+        qm.questIdx = _idx + 1;
+        qm.HPSetting();
+        qm.transform.position = new Vector2(0, 3f);
     }
 
     private IEnumerator QuestCoolTime(int _idx, float _delay)

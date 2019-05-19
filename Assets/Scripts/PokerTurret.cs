@@ -29,6 +29,10 @@ public class PokerTurret : MonoBehaviour
     private Vector3 offset;
     private Vector3 pos;
 
+    private AudioSource audioSource;
+
+    public AudioClip attackAudioClip;
+
     private void OnMouseDown()
     {
         if (GameManager.instance.waitForSale)
@@ -122,6 +126,7 @@ public class PokerTurret : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         pos = this.transform.position;
         InvokeRepeating("FindEnemy", 0f, timeBetFire);
     }
@@ -173,6 +178,7 @@ public class PokerTurret : MonoBehaviour
                     b.speed = 8f;
                     break;
             }
+            audioSource.PlayOneShot(attackAudioClip);
             bulletPrefab.transform.position = this.transform.position;
             bulletPrefab.SetActive(true);
         }

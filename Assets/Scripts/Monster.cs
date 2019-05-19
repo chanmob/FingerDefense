@@ -23,6 +23,15 @@ public class Monster : MonoBehaviour, IDamageable
 
     public IEnumerator shockCoroutine;
 
+    private AudioSource audioSource;
+    public AudioClip fingerAttackClip;
+    public AudioClip moneyClip;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnEnable()
     {
         MonsterHpReset();
@@ -59,6 +68,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void OnMouseDown()
     {
+        audioSource.PlayOneShot(fingerAttackClip);
         OnDamage(GameManager.instance.touchDamage);
     }
 
@@ -72,6 +82,7 @@ public class Monster : MonoBehaviour, IDamageable
 
         if(curHp <= 0)
         {
+            GameManager.instance.coinAudio.PlayOneShot(moneyClip);
             MonsterDie();
         }
     }

@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 3388197684972742482}
   - component: {fileID: 4532546756811229436}
   - component: {fileID: 91722024598422073}
+  - component: {fileID: 2214357066379491078}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -241,15 +242,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7647b11189be3a04e89ed4b588311b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shockSpeed:
+    currentCryptoKey: 444444
+    hiddenValue: 444445
+    inited: 1
+    fakeValue: 1
+    fakeValueActive: 1
   maxHp:
+    migratedVersion: 
     currentCryptoKey: 444444
     hiddenValue: 444444
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
     inited: 1
     fakeValue: 0
     fakeValueActive: 0
   curHp:
+    migratedVersion: 
     currentCryptoKey: 444444
     hiddenValue: 444444
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
     inited: 1
     fakeValue: 0
     fakeValueActive: 0
@@ -268,14 +287,14 @@ MonoBehaviour:
   speed:
     migratedVersion: 
     currentCryptoKey: 230887
-    hiddenValue: 1065714663
+    hiddenValue: 1065731047
     hiddenValueOldByte4:
       b1: 0
       b2: 0
       b3: 0
       b4: 0
     inited: 1
-    fakeValue: 1
+    fakeValue: 1.5
     fakeValueActive: 1
   isFreeze:
     currentCryptoKey: 215
@@ -289,7 +308,111 @@ MonoBehaviour:
     inited: 1
     fakeValue: 0
     fakeValueActive: 1
+  isDie:
+    currentCryptoKey: 215
+    hiddenValue: 98
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
   healthBar: {fileID: 1553436028077994321}
+  fingerAttackClip: {fileID: 8300000, guid: 0aae817b856cdc44782ffda3136f1e71, type: 3}
+  moneyClip: {fileID: 8300000, guid: 60993ec438d07c148b0c86c65fe393d0, type: 3}
+--- !u!82 &2214357066379491078
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5384370861349468775}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0aae817b856cdc44782ffda3136f1e71, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8895611369987344651
 GameObject:
   m_ObjectHideFlags: 0
