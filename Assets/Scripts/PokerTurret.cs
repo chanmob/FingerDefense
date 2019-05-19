@@ -16,7 +16,7 @@ public class PokerTurret : MonoBehaviour
 
     public TURRETTYPE turretType = TURRETTYPE.NONE;
 
-    public ObscuredInt power;
+    public ObscuredFloat power;
     public ObscuredInt turretLevel;
     public ObscuredInt turretPositionIndex;
 
@@ -31,9 +31,20 @@ public class PokerTurret : MonoBehaviour
 
     private void OnMouseDown()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        offset = this.transform.position - mousePosition;
-        GetComponent<SpriteRenderer>().sortingOrder = 1;
+        if (GameManager.instance.waitForSale)
+        {
+            GameManager.instance.DestroyTurret(this);
+            GameManager.instance.createdPosition[turretPositionIndex] = false;
+            GameManager.instance.money += (turretLevel + 1) * 50;
+            GameManager.instance.MoneyTextRefresh();
+        }
+
+        else
+        {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            offset = this.transform.position - mousePosition;
+            GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
     }
 
     private void OnMouseDrag()
@@ -72,7 +83,7 @@ public class PokerTurret : MonoBehaviour
             {
                 Debug.Log("합체 성공");
                 GameManager.instance.DestroyTurret(this);
-                GameManager.instance.CreatedPosition[turretPositionIndex] = false;
+                GameManager.instance.createdPosition[turretPositionIndex] = false;
                 pt.turretLevel++;
                 int randomTurret = Random.Range(0, GameManager.instance.turrets.Length);
 

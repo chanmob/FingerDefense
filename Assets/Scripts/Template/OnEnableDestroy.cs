@@ -6,7 +6,7 @@ using CodeStage.AntiCheat.ObscuredTypes;
 public class OnEnableDestroy : MonoBehaviour
 {
     private SpriteRenderer sp;
-    public ObscuredInt damage;
+    public ObscuredFloat damage;
     public GameObject target;
 
     private void Start()
@@ -21,7 +21,7 @@ public class OnEnableDestroy : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (collision == target)
+            if (collision.gameObject == target)
                 return;
 
             collision.GetComponent<IDamageable>().OnDamage(damage);

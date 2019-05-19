@@ -37,7 +37,12 @@ public class GameUI : MonoBehaviour
 
     public void CreateTurretButton()
     {
-        if(gm.money >= (buyTurretCount * 100 + 100))
+        if (gm.spawnIdx.Count <= 0)
+        {
+            return;
+        }
+
+        if (gm.money >= (buyTurretCount * 100 + 100))
         {
             gm.money -= (buyTurretCount * 100 + 100);
             gm.MoneyTextRefresh();
@@ -50,7 +55,18 @@ public class GameUI : MonoBehaviour
 
     public void SellTurretButton()
     {
+        StartCoroutine(SellTurretCoroutine());
+    }
 
+    private IEnumerator SellTurretCoroutine()
+    {
+        GameManager.instance.ReadyToSell();
+        GameManager.instance.waitForSale = true;
+
+        yield return new WaitTouch();
+
+        GameManager.instance.waitForSale = false;
+        GameManager.instance.FinishToSell();
     }
 
     public void UpgradeButton()

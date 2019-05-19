@@ -122,11 +122,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretType: 3
   power:
+    migratedVersion: 
     currentCryptoKey: 444444
-    hiddenValue: 444444
+    hiddenValue: 13108764
+    hiddenValueOldByte4:
+      b1: 0
+      b2: 0
+      b3: 0
+      b4: 0
     inited: 1
     fakeValue: 0
-    fakeValueActive: 0
+    fakeValueActive: 1
   turretLevel:
     currentCryptoKey: 444444
     hiddenValue: 444444
@@ -142,14 +148,14 @@ MonoBehaviour:
   timeBetFire:
     migratedVersion: 
     currentCryptoKey: 230887
-    hiddenValue: 1058806397
+    hiddenValue: 1061769002
     hiddenValueOldByte4:
       b1: 0
       b2: 0
       b3: 0
       b4: 0
     inited: 1
-    fakeValue: 0.6
+    fakeValue: 0.8
     fakeValueActive: 1
   bullet: {fileID: 7255852102525965685, guid: 3150487d2ead788468822d2fa128c138, type: 3}
 --- !u!95 &9130417640980892433

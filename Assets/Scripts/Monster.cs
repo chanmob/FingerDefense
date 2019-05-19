@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour, IDamageable
 {
-    public ObscuredInt maxHp;
-    public ObscuredInt curHp;
     public ObscuredInt shockSpeed = 1;
+
+    public ObscuredFloat maxHp;
+    public ObscuredFloat curHp;
     public ObscuredFloat curSpeed;
     public ObscuredFloat speed = 1f;
     private ObscuredFloat lastFreezeTime;
@@ -61,7 +62,7 @@ public class Monster : MonoBehaviour, IDamageable
         OnDamage(GameManager.instance.touchDamage);
     }
 
-    public void OnDamage(int _damage)
+    public void OnDamage(float _damage)
     {
         if (isDie)
             return;

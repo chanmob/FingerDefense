@@ -8,7 +8,8 @@ public class GameManager : Singleton<GameManager>
 {
     private List<Transform> spawnPlace = new List<Transform>();
 
-    private List<int> spawnIdx = new List<int>();
+    [HideInInspector]
+    public List<int> spawnIdx = new List<int>();
     [HideInInspector]
     public ObscuredInt currentWave = 0;
     [HideInInspector]
@@ -29,7 +30,8 @@ public class GameManager : Singleton<GameManager>
     public ObscuredInt money = 0;
 
     [HideInInspector]
-    public ObscuredBool[] CreatedPosition;
+    public ObscuredBool[] createdPosition;
+    public ObscuredBool waitForSale = false;
 
     public Sprite[] spadeCards;
     public Sprite[] heartCards;
@@ -60,6 +62,7 @@ public class GameManager : Singleton<GameManager>
         int idx = RandomSpawnIndex(spawnIdx);
         var newTurret = GetTurret();
         var pos = spawnPlace[idx].position;
+        createdPosition[idx] = true;
 
         newTurret.transform.position = new Vector2(pos.x, pos.y + 0.05f);
         newTurret.GetComponent<PokerTurret>().turretPositionIndex = idx;
@@ -250,7 +253,7 @@ public class GameManager : Singleton<GameManager>
             spawnIdx.Add(i - 1);
         }
 
-        CreatedPosition = new ObscuredBool[spawnPlace.Count];
+        createdPosition = new ObscuredBool[spawnPlace.Count];
 
         StartCoroutine(CreateWave());
     }
@@ -332,5 +335,24 @@ public class GameManager : Singleton<GameManager>
     public void MoneyTextRefresh()
     {
         MoneyText.text = money.ToString();
+    }
+
+    public void ReadyToSell()
+    {
+        for (int i = 0; i < spawnPlace.Count; i++)
+        {
+            if(createdPosition[i] == true)
+            {
+                spawnPlace[i].GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f);
+            }
+        }
+    }
+
+    public void FinishToSell()
+    {
+        for (int i = 0; i < spawnPlace.Count; i++)
+        {
+            spawnPlace[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        }
     }
 }

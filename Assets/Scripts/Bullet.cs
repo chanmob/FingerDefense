@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject target;
     public ObscuredFloat speed;
-    public ObscuredInt damage;
+    public ObscuredFloat damage;
     public string type;
 
     public GameObject diaBulletEffect;
@@ -33,7 +33,6 @@ public class Bullet : MonoBehaviour
 
         else
         {
-            Debug.Log("타겟을 잃었어");
             GameManager.instance.DisableBullet(this.gameObject);
         }
     }
@@ -50,7 +49,7 @@ public class Bullet : MonoBehaviour
                     var diaBullet = Instantiate(diaBulletEffect, collision.transform.position ,Quaternion.identity);
                     diaBullet.transform.localScale = new Vector3(2f + GameManager.instance.diamondUpgrade * 0.25f, 2f + GameManager.instance.diamondUpgrade * 0.25f, 1);
                     var effect = diaBullet.GetComponent<OnEnableDestroy>();
-                    effect.damage = damage;
+                    effect.damage = damage * 0.5f;
                     effect.target = collision.gameObject;
                     break;
                 case "CLOVER":
