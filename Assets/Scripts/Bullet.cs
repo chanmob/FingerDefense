@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
                     break;
                 case "DIAMOND":
                     var diaBullet = Instantiate(diaBulletEffect, collision.transform.position ,Quaternion.identity);
-                    diaBullet.transform.localScale = new Vector3(2f + GameManager.instance.diamondUpgrade * 0.25f, 2f + GameManager.instance.diamondUpgrade * 0.25f, 1);
+                    diaBullet.transform.localScale = new Vector3(1.5f + GameManager.instance.diamondUpgrade * 0.25f, 1.5f + GameManager.instance.diamondUpgrade * 0.25f, 1);
                     var effect = diaBullet.GetComponent<OnEnableDestroy>();
                     effect.damage = damage * 0.5f;
                     effect.target = collision.gameObject;
