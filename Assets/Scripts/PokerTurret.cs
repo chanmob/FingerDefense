@@ -8,10 +8,10 @@ public class PokerTurret : MonoBehaviour
     public enum TURRETTYPE
     {
         NONE,
-        HEART,
-        SPADE,
         CLOVER,
-        DIAMOND
+        DIAMOND,
+        HEART,
+        SPADE
     }
 
     public TURRETTYPE turretType = TURRETTYPE.NONE;
@@ -86,7 +86,6 @@ public class PokerTurret : MonoBehaviour
             if (turretType == pt.turretType && this.turretLevel == pt.turretLevel)
             {
                 Debug.Log("합체 성공");
-                GameManager.instance.DestroyTurret(this);
                 GameManager.instance.createdPosition[turretPositionIndex] = false;
                 pt.turretLevel++;
                 int randomTurret = Random.Range(0, GameManager.instance.turrets.Length);
@@ -108,6 +107,12 @@ public class PokerTurret : MonoBehaviour
                 }
 
                 nearTurret.GetComponent<SpriteRenderer>().sprite = GameManager.instance.ChangeCardSprite(pt.turretType.ToString(), turretLevel + 1);
+                nearTurret.GetComponent<Animator>().SetTrigger("Coalescence");
+                Quest.instance.questTurretCount[(int)turretType - 1, turretLevel] -= 2;
+                Quest.instance.questTurretCount[randomTurret, turretLevel + 1] += 1;
+                Quest.instance.CheckHiddenQuest();
+                Quest.instance.CheckNormalQuest();
+                GameManager.instance.DestroyTurret(this);
             }
             else
             {

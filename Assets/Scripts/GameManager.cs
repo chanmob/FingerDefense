@@ -4,6 +4,7 @@ using UnityEngine;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -80,6 +81,8 @@ public class GameManager : Singleton<GameManager>
         newTurret.transform.position = new Vector2(pos.x, pos.y + 0.05f);
         newTurret.GetComponent<PokerTurret>().turretPositionIndex = idx;
         newTurret.GetComponent<Animator>().SetTrigger("Created");
+        Quest.instance.CheckNormalQuest();
+        Quest.instance.CheckHiddenQuest();
     }
 
     private int RandomSpawnIndex(List<int> _source)
@@ -99,6 +102,8 @@ public class GameManager : Singleton<GameManager>
 
         int randomTurret = Random.Range(0, turrets.Length);
         newTurret = Instantiate(turrets[randomTurret]);
+
+        Quest.instance.questTurretCount[randomTurret, 0] += 1;
 
         return newTurret;
     }
@@ -377,6 +382,11 @@ public class GameManager : Singleton<GameManager>
         for(int i = 4; i >= currenthp; i--)
         {
             hpImage[i].sprite = noHpSprite;
+        }
+
+        if(currenthp == 1)
+        {
+            Quest.instance.LastHpMission();
         }
 
         if(currenthp <= 0)
