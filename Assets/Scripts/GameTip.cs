@@ -12,7 +12,7 @@ public class GameTip : MonoBehaviour
     private string fifthTip = "10 웨이브 마다 보스가 출현합니다.";
     private string sixthTip = "터렛을 팔면\n현재 터렛 구매 시 소요되는 금액의 반을 받습니다.";
     private string seventhTip = "업그레이드를 하여 터렛과 클릭 시 공격을 높여보세요.";
-    private string eighthTip = "퀘스트는 함부로 도전하지 마세요.\n자신 있을때 도전 하세요.";
+    private string eighthTip = "퀘스트는 함부로 도전하지 마세요.\n무서운 적이 나타납니다.\n자신 있을때 도전 하세요.";
 
     public List<string> TipLists = new List<string>();
 

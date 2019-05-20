@@ -150,6 +150,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(hiddenQuestString[0], 4000);
                     hiddenQuest[0] = true;
                     GameManager.instance.money += 4000;
+                    PlayerPrefs.SetInt("Hidden6", 0);
                     break;
                 }
             }
@@ -180,6 +181,7 @@ public class Quest : Singleton<Quest>
                             hiddenQuest[1] = true;
                             clear = true;
                             GameManager.instance.money += 4000;
+                            PlayerPrefs.SetInt("Hidden5", 0);
                             break;
                         }
                     }
@@ -211,6 +213,7 @@ public class Quest : Singleton<Quest>
                         hiddenQuest[2] = true;
                         clear = true;
                         GameManager.instance.money += 5000;
+                        PlayerPrefs.SetInt("Hidden3", 0);
                     }
                 }
             }
@@ -239,6 +242,7 @@ public class Quest : Singleton<Quest>
                         hiddenQuest[3] = true;
                         clear = true;
                         GameManager.instance.money += 1000;
+                        PlayerPrefs.SetInt("Hidden1", 0);
                         break;
                     }
                 }
@@ -260,6 +264,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(hiddenQuestString[4], 2000);
                     hiddenQuest[4] = true;
                     GameManager.instance.money += 2000;
+                    PlayerPrefs.SetInt("Hidden2", 0);
                     break;
                 }
             }
@@ -283,6 +288,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(hiddenQuestString[5], 1000);
                     hiddenQuest[5] = true;
                     GameManager.instance.money += 1000;
+                    PlayerPrefs.SetInt("Hidden4", 0);
                     break;
                 }
             }
