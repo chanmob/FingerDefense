@@ -418,6 +418,42 @@ public class GameManager : Singleton<GameManager>
                 ObscuredPrefs.SetInt("BESTSCORE", currentWave);
             }
 
+            if(currentWave >= 100)
+            {
+                if (GooglePlay.instance.GooglePlayLogine())
+                {
+                    GooglePlay.instance.GetAchievement(GPGSIds.achievement_100);
+                }
+            }
+            if(currentWave >= 80)
+            {
+                if (GooglePlay.instance.GooglePlayLogine())
+                {
+                    GooglePlay.instance.GetAchievement(GPGSIds.achievement_80);
+                }
+            }
+            if(currentWave >= 60)
+            {
+                if (GooglePlay.instance.GooglePlayLogine())
+                {
+                    GooglePlay.instance.GetAchievement(GPGSIds.achievement_60);
+                }
+            }
+            if(currentWave >= 40)
+            {
+                if (GooglePlay.instance.GooglePlayLogine())
+                {
+                    GooglePlay.instance.GetAchievement(GPGSIds.achievement_40);
+                }
+            }
+            if(currentWave >= 20)
+            {
+                if (GooglePlay.instance.GooglePlayLogine())
+                {
+                    GooglePlay.instance.GetAchievement(GPGSIds.achievement_20);
+                }
+            }
+
             StartCoroutine(CountingWave(resultWaveText));
             //resultPanel.transform.Find("CurretWave").GetComponent<Text>().text = "이번 웨이브 : " + currentWave;
             bestWaveText.text = "최고 웨이브 : " + bestScore;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CodeStage.AntiCheat.ObscuredTypes;
 
 public class MainUI : MonoBehaviour
 {
@@ -54,12 +55,41 @@ public class MainUI : MonoBehaviour
 
     public void Ranking()
     {
+        int bestScore = 0;
+        int uploadScore = 0;
 
+        if (ObscuredPrefs.HasKey("BESTSCORE"))
+        {
+            bestScore = ObscuredPrefs.GetInt("BESTSCORE");
+        }
+
+        if (ObscuredPrefs.HasKey("UPLOADSCORE"))
+        {
+            uploadScore = ObscuredPrefs.GetInt("UPLOADSCORE");
+        }
+
+        if(bestScore != uploadScore)
+        {
+            uploadScore = bestScore;
+            ObscuredPrefs.SetInt("UPLOADSCORE", uploadScore);
+
+            if (GooglePlay.instance.GooglePlayLogine())
+            {
+                GooglePlay.instance.UploadRanking(uploadScore);
+                GooglePlay.instance.ShowRanking();
+            }
+        }
+        else
+        {
+            if (GooglePlay.instance.GooglePlayLogine())
+                GooglePlay.instance.ShowRanking();
+        }
     }
 
-    public void Archieve()
+    public void Achieve()
     {
-
+        if (GooglePlay.instance.GooglePlayLogine())
+            GooglePlay.instance.ShowAchievements();
     }
 
     public void Quit()

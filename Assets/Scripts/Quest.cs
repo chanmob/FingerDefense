@@ -127,6 +127,35 @@ public class Quest : Singleton<Quest>
                     QuestInfo(normalQuestString[4], 1000);
                     normalQuest[4] = true;
                     GameManager.instance.money += 1000;
+
+                    switch (i)
+                    {
+                        case 0:
+                            if (GooglePlay.instance.GooglePlayLogine())
+                            {
+                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_3);
+                            }
+                            break;
+                        case 1:
+                            if (GooglePlay.instance.GooglePlayLogine())
+                            {
+                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_2);
+                            }
+                            break;
+                        case 2:
+                            if (GooglePlay.instance.GooglePlayLogine())
+                            {
+                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_4);
+                            }
+                            break;
+                        case 3:
+                            if (GooglePlay.instance.GooglePlayLogine())
+                            {
+                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7);
+                            }
+                            break;
+                    }
+
                     break;
                 }
             }

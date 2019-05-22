@@ -1721,7 +1721,7 @@ GameObject:
   - component: {fileID: 988785232}
   - component: {fileID: 988785231}
   m_Layer: 5
-  m_Name: Archieve
+  m_Name: Achieve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
