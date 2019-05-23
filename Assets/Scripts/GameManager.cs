@@ -385,8 +385,16 @@ public class GameManager : Singleton<GameManager>
         {
             Quest.instance.LastHpMission();
         }
+  
+        for (int i = 4; i >= currenthp; i--)
+        {
+            if (i < 0)
+                break;
 
-        if(currenthp <= 0)
+            hpImage[i].sprite = noHpSprite;
+        }
+
+        if (currenthp <= 0)
         {
             Debug.Log("게임 종료");
             gameOver = true;
@@ -408,6 +416,7 @@ public class GameManager : Singleton<GameManager>
 
                 if(currentWave > bestScore)
                 {
+                    bestScore = currentWave;
                     ObscuredPrefs.SetInt("BESTSCORE", currentWave);
                 }
             }
@@ -459,11 +468,6 @@ public class GameManager : Singleton<GameManager>
             UIDoTween.instance.UITweenY(resultPanel, 0, 1f, Ease.InCubic);
 
             return;
-        }
-
-        for (int i = 4; i >= currenthp; i--)
-        {
-            hpImage[i].sprite = noHpSprite;
         }
     }
 

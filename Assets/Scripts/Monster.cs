@@ -106,9 +106,9 @@ public class Monster : MonoBehaviour, IDamageable
             isFreeze = false;
         }
 
-        if(curSpeed <= speed * 0.5f)
+        if(curSpeed <= speed * 0.3f)
         {
-            curSpeed = speed * 0.5f;
+            curSpeed = speed * 0.3f;
         }
 
         this.transform.Translate(Vector2.down * curSpeed * Time.deltaTime * shockSpeed);
@@ -139,25 +139,30 @@ public class Monster : MonoBehaviour, IDamageable
         curSpeed = curSpeed * (1 - _slowAmount);
     }
 
-    public void Shock()
+    public void Shock(float _shockTime)
     {
         if (isShock || this.gameObject.activeSelf == false)
             return;
 
-        shockCoroutine = ShockCoroutine();
+        if(_shockTime >= 0.8f)
+        {
+            _shockTime = 0.8f;
+        }
+
+        shockCoroutine = ShockCoroutine(_shockTime);
         StartCoroutine(shockCoroutine);
     }
 
-    private IEnumerator ShockCoroutine()
+    private IEnumerator ShockCoroutine(float _shockTime)
     {
         isShock = true;
         shockSpeed = 0;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(_shockTime);
 
         shockSpeed = 1;
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1f);
         isShock = false;
     }
 }

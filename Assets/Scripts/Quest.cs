@@ -52,6 +52,7 @@ public class Quest : Singleton<Quest>
                 QuestInfo(normalQuestString[0], 400);
                 normalQuest[0] = true;
                 GameManager.instance.money += 400;
+                GameManager.instance.MoneyTextRefresh();
             }
         }
         if (normalQuest[1] == false)
@@ -70,6 +71,7 @@ public class Quest : Singleton<Quest>
                 QuestInfo(normalQuestString[1], 800);
                 normalQuest[1] = true;
                 GameManager.instance.money += 800;
+                GameManager.instance.MoneyTextRefresh();
             }
         }
         if (normalQuest[2] == false)
@@ -84,10 +86,12 @@ public class Quest : Singleton<Quest>
 
             if (QuestMultiValue(temp.ToArray()) != 0)
             {
-                Debug.Log("노말 2번 완료");
+
                 QuestInfo(normalQuestString[2], 1600);
                 normalQuest[2] = true;
+                Debug.Log("노말 2번 완료");
                 GameManager.instance.money += 1600;
+                GameManager.instance.MoneyTextRefresh();
             }
         }
         if (normalQuest[3] == false)
@@ -105,6 +109,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(normalQuestString[3], 400);
                     normalQuest[3] = true;
                     GameManager.instance.money += 400;
+                    GameManager.instance.MoneyTextRefresh();
                     break;
                 }
             }
@@ -126,7 +131,8 @@ public class Quest : Singleton<Quest>
                     Debug.Log("노말 4번 완료");
                     QuestInfo(normalQuestString[4], 1000);
                     normalQuest[4] = true;
-                    GameManager.instance.money += 1000;
+                    GameManager.instance.money += 1500;
+                    GameManager.instance.MoneyTextRefresh();
 
                     switch (i)
                     {
@@ -179,6 +185,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(hiddenQuestString[0], 4000);
                     hiddenQuest[0] = true;
                     GameManager.instance.money += 4000;
+                    GameManager.instance.MoneyTextRefresh();
                     PlayerPrefs.SetInt("Hidden6", 0);
                     break;
                 }
@@ -210,6 +217,7 @@ public class Quest : Singleton<Quest>
                             hiddenQuest[1] = true;
                             clear = true;
                             GameManager.instance.money += 4000;
+                            GameManager.instance.MoneyTextRefresh();
                             PlayerPrefs.SetInt("Hidden5", 0);
                             break;
                         }
@@ -242,6 +250,7 @@ public class Quest : Singleton<Quest>
                         hiddenQuest[2] = true;
                         clear = true;
                         GameManager.instance.money += 5000;
+                        GameManager.instance.MoneyTextRefresh();
                         PlayerPrefs.SetInt("Hidden3", 0);
                     }
                 }
@@ -271,7 +280,7 @@ public class Quest : Singleton<Quest>
                         hiddenQuest[3] = true;
                         clear = true;
                         GameManager.instance.money += 1000;
-                        PlayerPrefs.SetInt("Hidden1", 0);
+                        GameManager.instance.MoneyTextRefresh();
                         break;
                     }
                 }
@@ -293,6 +302,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(hiddenQuestString[4], 2000);
                     hiddenQuest[4] = true;
                     GameManager.instance.money += 2000;
+                    GameManager.instance.MoneyTextRefresh();
                     PlayerPrefs.SetInt("Hidden2", 0);
                     break;
                 }
@@ -317,6 +327,7 @@ public class Quest : Singleton<Quest>
                     QuestInfo(hiddenQuestString[5], 1000);
                     hiddenQuest[5] = true;
                     GameManager.instance.money += 1000;
+                    GameManager.instance.MoneyTextRefresh();
                     PlayerPrefs.SetInt("Hidden4", 0);
                     break;
                 }
@@ -330,6 +341,7 @@ public class Quest : Singleton<Quest>
         {
             normalQuest[5] = true;
             GameManager.instance.money += 1000;
+            GameManager.instance.MoneyTextRefresh();
             QuestInfo(normalQuestString[5], 1000);
         }
     }
