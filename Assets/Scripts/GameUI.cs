@@ -19,7 +19,7 @@ public class GameUI : MonoBehaviour
     private ObscuredInt cloverUpgradeCost = 100;
     private ObscuredInt diamondUpgradeCost = 100;
 
-    private readonly float[] questCoolTime = new float[5] { 60f, 120f, 180f, 240f, 300f };
+    private readonly float[] questCoolTime = new float[5] { 30f, 60f, 90f, 120f, 150f };
 
     private GameManager gm;
 
@@ -32,7 +32,9 @@ public class GameUI : MonoBehaviour
     public Text[] cloverTexts;
     public Text[] diamondTexts;
 
-    public Image[] QuestBars;
+    public Image[] questBars;
+
+    public Button[] questButtons;
 
     private void Start()
     {
@@ -270,6 +272,7 @@ public class GameUI : MonoBehaviour
 
     public void StartQuest(int _idx)
     {
+        questButtons[_idx].interactable = false;
         StartCoroutine(QuestCoolTime(_idx, questCoolTime[_idx]));
 
         var qm = Instantiate(questMonster).GetComponent<QuestMonster>();
@@ -281,18 +284,19 @@ public class GameUI : MonoBehaviour
 
     private IEnumerator QuestCoolTime(int _idx, float _delay)
     {
-        QuestBars[_idx].fillAmount = 0;
+        questBars[_idx].fillAmount = 0;
         float time = 0f;
 
         while(time <= _delay)
         {
             time += Time.deltaTime;
 
-            QuestBars[_idx].fillAmount = time / _delay;
+            questBars[_idx].fillAmount = time / _delay;
 
             yield return null;
         }
 
-        QuestBars[_idx].fillAmount = 1;
+        questBars[_idx].fillAmount = 1;
+        questButtons[_idx].interactable = true;
     }
 }

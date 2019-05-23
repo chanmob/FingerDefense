@@ -42,7 +42,7 @@ public class PokerTurret : MonoBehaviour
             GameManager.instance.DestroyTurret(this);
             GameManager.instance.createdPosition[turretPositionIndex] = false;
             Quest.instance.questTurretCount[(int)turretType - 1, turretLevel] -= 1;
-            GameManager.instance.money += GameManager.instance.buyTurretCount * 50;
+            GameManager.instance.money += (GameManager.instance.buyTurretCount * 100 + 100) / 2;
             GameManager.instance.MoneyTextRefresh();
         }
 

@@ -1980,12 +1980,13 @@ MonoBehaviour:
   diamondTexts:
   - {fileID: 1098652964}
   - {fileID: 1952225303}
-  QuestBars:
-  - {fileID: 19977846}
-  - {fileID: 202303493}
-  - {fileID: 856855075}
-  - {fileID: 825950025}
-  - {fileID: 402044748}
+  questBars: []
+  questButtons:
+  - {fileID: 620038765}
+  - {fileID: 920753847}
+  - {fileID: 792934054}
+  - {fileID: 1095808437}
+  - {fileID: 1120283758}
 --- !u!4 &420126022
 Transform:
   m_ObjectHideFlags: 0

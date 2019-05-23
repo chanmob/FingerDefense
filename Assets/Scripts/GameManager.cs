@@ -381,11 +381,6 @@ public class GameManager : Singleton<GameManager>
         if (gameOver)
             return;
 
-        for(int i = 4; i >= currenthp; i--)
-        {
-            hpImage[i].sprite = noHpSprite;
-        }
-
         if(currenthp == 1)
         {
             Quest.instance.LastHpMission();
@@ -462,6 +457,13 @@ public class GameManager : Singleton<GameManager>
             //resultPanel.transform.Find("CurretWave").GetComponent<Text>().text = "이번 웨이브 : " + currentWave;
             bestWaveText.text = "최고 웨이브 : " + bestScore;
             UIDoTween.instance.UITweenY(resultPanel, 0, 1f, Ease.InCubic);
+
+            return;
+        }
+
+        for (int i = 4; i >= currenthp; i--)
+        {
+            hpImage[i].sprite = noHpSprite;
         }
     }
 
