@@ -26,16 +26,19 @@ public class GooglePlay : Singleton<GooglePlay>
                 if (success)
                 {
                     result = true;
+                    Debug.Log("로그인 성공");
                 }
                 else
                 {
                     result = false;
+                    Debug.Log("로그인 실패");
                 }
             });
         }
         else
         {
             result = true;
+            Debug.Log("이미 로그인");
         }
 
         return result;

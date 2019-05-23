@@ -29,9 +29,11 @@ public class PokerTurret : MonoBehaviour
     private Vector3 offset;
     private Vector3 pos;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     public AudioClip attackAudioClip;
+    public AudioClip createdAudioClip;
+    public AudioClip collaboAudioClip;
 
     private void OnMouseDown()
     {
@@ -109,6 +111,8 @@ public class PokerTurret : MonoBehaviour
 
                 nearTurret.GetComponent<SpriteRenderer>().sprite = GameManager.instance.ChangeCardSprite(pt.turretType.ToString(), turretLevel + 1);
                 nearTurret.GetComponent<Animator>().SetTrigger("Coalescence");
+                pt.audioSource.PlayOneShot(pt.collaboAudioClip);
+                pt.Collabo();
                 Quest.instance.questTurretCount[(int)turretType - 1, turretLevel] -= 2;
                 Quest.instance.questTurretCount[randomTurret, turretLevel + 1] += 1;
                 Quest.instance.CheckHiddenQuest();
@@ -134,6 +138,30 @@ public class PokerTurret : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         pos = this.transform.position;
+        audioSource.PlayOneShot(createdAudioClip);
+        InvokeRepeating("FindEnemy", 0f, timeBetFire);
+    }
+
+    public void Collabo()
+    {
+        CancelInvoke("FindEnemy");
+
+        switch (turretType)
+        {
+            case TURRETTYPE.CLOVER:
+                timeBetFire = 0.8f;
+                break;
+            case TURRETTYPE.DIAMOND:
+                timeBetFire = 0.7f;
+                break;
+            case TURRETTYPE.HEART:
+                timeBetFire = 0.3f;
+                break;
+            case TURRETTYPE.SPADE:
+                timeBetFire = 0.9f;
+                break;
+        }
+
         InvokeRepeating("FindEnemy", 0f, timeBetFire);
     }
 

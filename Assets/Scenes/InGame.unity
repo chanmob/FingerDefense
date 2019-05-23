@@ -1057,6 +1057,7 @@ MonoBehaviour:
   - {fileID: 380310073}
   - {fileID: 1557640845}
   coinAudio: {fileID: 274116516}
+  hitAudioClip: {fileID: 8300000, guid: df2594e789b72fa4d96774851bfeb732, type: 3}
   resultPanel: {fileID: 439834901}
 --- !u!4 &274116514
 Transform:
@@ -1084,7 +1085,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a4dc56d5650dac246ae694a19f88790d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -14,10 +14,8 @@
 
 #if UNITY_ANDROID
 
-using System;
 using UnityEngine;
 
-using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Android
@@ -26,6 +24,7 @@ namespace GoogleMobileAds.Android
     {
         private static MobileAdsClient instance = new MobileAdsClient();
 
+        private MobileAdsClient(){}
 
         public static MobileAdsClient Instance
         {
@@ -60,7 +59,6 @@ namespace GoogleMobileAds.Android
         {
             // Do nothing on Android. Default behavior is to pause when app is backgrounded.
         }
-
     }
 }
 

@@ -1,5 +1,5 @@
-lastUpgrade=00963
-proj.pluginVersion=0.9.63
+lastUpgrade=00964
+proj.pluginVersion=0.9.64
 proj.AppId=214310919669
 and.BundleId=com.ChanMob.FingerDefense
 proj.classDir=Assets

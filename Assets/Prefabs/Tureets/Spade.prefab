@@ -160,6 +160,8 @@ MonoBehaviour:
     fakeValueActive: 1
   bullet: {fileID: 6285206171476136781, guid: 1e212b6db65b6e740a69af884430fae4, type: 3}
   attackAudioClip: {fileID: 8300000, guid: 9018bc91f09df82488ac419992deb13e, type: 3}
+  createdAudioClip: {fileID: 8300000, guid: 6f7a787f8d56d1c4b9b502e7b294b5ff, type: 3}
+  collaboAudioClip: {fileID: 8300000, guid: 0023df2d040a886429670d77999831d1, type: 3}
 --- !u!95 &1585352486663841521
 Animator:
   serializedVersion: 3

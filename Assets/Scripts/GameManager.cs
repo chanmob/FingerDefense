@@ -69,6 +69,8 @@ public class GameManager : Singleton<GameManager>
 
     public AudioSource coinAudio;
 
+    public AudioClip hitAudioClip;
+
     public RectTransform resultPanel;
 
     public void TurretCreated()
@@ -402,6 +404,8 @@ public class GameManager : Singleton<GameManager>
             }
 
             int bestScore = 0;
+
+            Admob.instance.ShowScreenAD();
 
             if (ObscuredPrefs.HasKey("BESTSCORE"))
             {

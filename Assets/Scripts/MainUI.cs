@@ -9,7 +9,6 @@ public class MainUI : MonoBehaviour
     private bool soundOff = false;
     public Image soundImage;
     public Sprite[] soundSprites;
-
     private void Start()
     {
         if (PlayerPrefs.HasKey("SOUND"))

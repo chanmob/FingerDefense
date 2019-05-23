@@ -10,6 +10,7 @@ public class QuestMonster : Monster
     public override void MonsterArriveDeadZone()
     {
         GameManager.instance.currenthp -= questIdx;
+        GameManager.instance.coinAudio.PlayOneShot(GameManager.instance.hitAudioClip);
         GameManager.instance.CheckEndGame();
         Destroy(this.gameObject);
     }

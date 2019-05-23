@@ -125,6 +125,7 @@ public class Monster : MonoBehaviour, IDamageable
     public virtual void MonsterArriveDeadZone()
     {
         GameManager.instance.currenthp--;
+        GameManager.instance.coinAudio.PlayOneShot(GameManager.instance.hitAudioClip);
         GameManager.instance.CheckEndGame();
         GameManager.instance.DisableMonster(this.gameObject);
     }
