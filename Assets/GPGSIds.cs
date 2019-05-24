@@ -24,16 +24,16 @@
 
 public static class GPGSIds
 {
-        public const string achievement__7 = "CgkI9bu0r54GEAIQBg"; // <GPGSID>
-        public const string achievement_60 = "CgkI9bu0r54GEAIQAw"; // <GPGSID>
-        public const string achievement_100 = "CgkI9bu0r54GEAIQBQ"; // <GPGSID>
-        public const string leaderboard = "CgkI9bu0r54GEAIQCg"; // <GPGSID>
-        public const string achievement__7_3 = "CgkI9bu0r54GEAIQCA"; // <GPGSID>
-        public const string achievement_80 = "CgkI9bu0r54GEAIQBA"; // <GPGSID>
-        public const string achievement_40 = "CgkI9bu0r54GEAIQAg"; // <GPGSID>
-        public const string achievement__7_2 = "CgkI9bu0r54GEAIQBw"; // <GPGSID>
-        public const string achievement__7_4 = "CgkI9bu0r54GEAIQCQ"; // <GPGSID>
-        public const string achievement_20 = "CgkI9bu0r54GEAIQAQ"; // <GPGSID>
+        public const string achievement__7 = "CgkI-5KggP8LEAIQBg"; // <GPGSID>
+        public const string achievement_60 = "CgkI-5KggP8LEAIQAw"; // <GPGSID>
+        public const string achievement_100 = "CgkI-5KggP8LEAIQBQ"; // <GPGSID>
+        public const string leaderboard = "CgkI-5KggP8LEAIQCg"; // <GPGSID>
+        public const string achievement__7_3 = "CgkI-5KggP8LEAIQCA"; // <GPGSID>
+        public const string achievement_80 = "CgkI-5KggP8LEAIQBA"; // <GPGSID>
+        public const string achievement_40 = "CgkI-5KggP8LEAIQAg"; // <GPGSID>
+        public const string achievement__7_2 = "CgkI-5KggP8LEAIQBw"; // <GPGSID>
+        public const string achievement__7_4 = "CgkI-5KggP8LEAIQCQ"; // <GPGSID>
+        public const string achievement_20 = "CgkI-5KggP8LEAIQAQ"; // <GPGSID>
 
 }
 

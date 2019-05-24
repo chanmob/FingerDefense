@@ -418,7 +418,6 @@ public class GameManager : Singleton<GameManager>
                 {
                     bestScore = currentWave;
                     ObscuredPrefs.SetInt("BESTSCORE", currentWave);
-                    ObscuredPrefs.SetInt("UPLOADSCORE", bestScore);
 
                     if (GooglePlay.instance.GooglePlayLogine())
                         GooglePlay.instance.UploadRanking(bestScore);

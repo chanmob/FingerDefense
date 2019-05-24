@@ -139,13 +139,13 @@ public class Quest : Singleton<Quest>
                         case 0:
                             if (GooglePlay.instance.GooglePlayLogine())
                             {
-                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_3);
+                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_2);
                             }
                             break;
                         case 1:
                             if (GooglePlay.instance.GooglePlayLogine())
                             {
-                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_2);
+                                GooglePlay.instance.GetAchievement(GPGSIds.achievement__7_3);
                             }
                             break;
                         case 2:

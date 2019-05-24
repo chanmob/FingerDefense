@@ -52,10 +52,11 @@ public class GooglePlay : Singleton<GooglePlay>
 
     public void UploadRanking(int _score)
     {
-        Social.ReportScore((long)_score, GPGSIds.leaderboard, (bool succsee) =>
+        Social.ReportScore(_score, GPGSIds.leaderboard, (bool succsee) =>
         {
             if (succsee)
             {
+                ObscuredPrefs.SetInt("UPLOADSCORE", _score);
                 Debug.Log("업로드 성공");
             }
             else
