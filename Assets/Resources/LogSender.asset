@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546a8309a0cd2b6489a1e1fdf0b94dca, type: 3}
   m_Name: LogSender
   m_EditorClassIdentifier: 
-  enable: 1
+  enable: 0
   ip: 192.168.219.112
   port: 11230

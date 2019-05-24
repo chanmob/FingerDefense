@@ -4,6 +4,7 @@ using UnityEngine;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using System;
+using CodeStage.AntiCheat.ObscuredTypes;
 
 public class GooglePlay : Singleton<GooglePlay>
 {
@@ -51,7 +52,18 @@ public class GooglePlay : Singleton<GooglePlay>
 
     public void UploadRanking(int _score)
     {
-        Social.ReportScore((long)_score, GPGSIds.leaderboard, null);
+        Social.ReportScore((long)_score, GPGSIds.leaderboard, (bool succsee) =>
+        {
+            if (succsee)
+            {
+                Debug.Log("업로드 성공");
+            }
+            else
+            {
+                ObscuredPrefs.DeleteKey("UPLOADSCORE");
+            }
+        }
+        );
     }
 
     public void ShowAchievements()
