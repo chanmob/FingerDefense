@@ -68,6 +68,9 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void OnMouseDown()
     {
+        if (Time.timeScale == 0)
+            return;
+
         audioSource.PlayOneShot(fingerAttackClip);
         OnDamage(GameManager.instance.touchDamage);
     }

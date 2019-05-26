@@ -13,6 +13,7 @@ public class GameTip : MonoBehaviour
     private string sixthTip = "터렛을 팔면\n현재 터렛 구매 시 소요되는 금액의 반을 받습니다.";
     private string seventhTip = "업그레이드를 하여 터렛과 클릭 시 공격을 높여보세요.";
     private string eighthTip = "퀘스트는 함부로 도전하지 마세요.\n무서운 적이 나타납니다.\n자신 있을때 도전 하세요.";
+    private string nineTip = "터렛을 클릭하여 터렛의 정보를 확인할 수 있습니다.";
 
     public List<string> TipLists = new List<string>();
 
@@ -32,8 +33,11 @@ public class GameTip : MonoBehaviour
         TipLists.Add(sixthTip);
         TipLists.Add(seventhTip);
         TipLists.Add(eighthTip);
+        TipLists.Add(nineTip);
 
         tipText.text = TipLists[0];
+
+        indexText.text = (idx + 1).ToString() + "/" + TipLists.Count;
     }
 
     public void Before()
@@ -44,7 +48,7 @@ public class GameTip : MonoBehaviour
             idx = 0;
 
         tipText.text = TipLists[idx];
-        indexText.text = (idx + 1).ToString() + "/8";
+        indexText.text = (idx + 1).ToString() + "/" + TipLists.Count;
     }
 
     public void After()
@@ -55,6 +59,6 @@ public class GameTip : MonoBehaviour
             idx = TipLists.Count - 1;
 
         tipText.text = TipLists[idx];
-        indexText.text = (idx + 1).ToString() + "/8";
+        indexText.text = (idx + 1).ToString() + "/" + TipLists.Count;
     }
 }

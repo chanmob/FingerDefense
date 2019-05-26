@@ -5,7 +5,7 @@ using DG.Tweening;
 using CodeStage.AntiCheat.ObscuredTypes;
 using UnityEngine.UI;
 
-public class GameUI : MonoBehaviour
+public class GameUI : Singleton<GameUI>
 {
     public RectTransform upgradePanel;
     public RectTransform questPanel;
@@ -24,6 +24,7 @@ public class GameUI : MonoBehaviour
     private GameManager gm;
 
     public GameObject questMonster;
+    public GameObject turretInfo;
 
     public Text turretCostText;
     public Text[] fingerTexts;
@@ -62,6 +63,55 @@ public class GameUI : MonoBehaviour
     public void SellTurretButton()
     {
         StartCoroutine(SellTurretCoroutine());
+    }
+
+    public void PauseButton()
+    {
+        if(Time.timeScale == 0)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
+    }
+
+    public void GetTurretInfo(Sprite _sprite, string _type, int _lv, int upgrade)
+    {
+        turretInfo.SetActive(true);
+
+        var turretImg = turretInfo.transform.Find("Image/TurretImg").GetComponent<Image>();
+        var turretInfoText = turretInfo.transform.Find("Info").GetComponent<Text>();
+
+        turretImg.sprite = _sprite;
+        var power = ((_lv * 2.5f) + 1).ToString() + " + " + upgrade.ToString();
+        switch (_type)
+        {
+            case "CLOVER":
+                float freezeamount = 0.1f + (_lv * 0.1f) + (0.1f * upgrade);
+                string freeze = "";
+                if (freezeamount >= 0.7f)
+                    freeze = "0.7";
+                else
+                    freeze = (0.1f + (_lv * 0.1f)).ToString() + " + " + (0.1f * upgrade).ToString();
+
+                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.8" + " / 둔화율 : " + freeze;
+                break;
+            case "DIAMOND":
+                var splash = (1.5f + (_lv * 0.25f)).ToString() + " + " + (0.25f * upgrade).ToString();
+                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.7" + " / 범위 공격 : " + splash;
+                break;
+            case "HEART":
+                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.3";
+                break;
+            case "SPADE":
+                float shockamount = 0.3f + (_lv * 0.05f) + (0.05f * upgrade);
+                string shock = "";
+                if (shockamount > 0.8f)
+                    shock = "0.8";
+                else
+                    shock = (0.3f + (_lv * 0.05f)).ToString() + " + " + (0.05f * upgrade).ToString();
+
+                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.9" + " / 마비 시간 : " + shock;
+                break;
+        }
     }
 
     private IEnumerator SellTurretCoroutine()

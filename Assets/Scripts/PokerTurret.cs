@@ -62,6 +62,28 @@ public class PokerTurret : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (Vector2.Distance(pos, mousePosition) <= 0.5f)
+        {
+            Debug.Log("정보 띄우기");
+            Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+
+            switch (turretType)
+            {
+                case TURRETTYPE.CLOVER:
+                    GameUI.instance.GetTurretInfo(sprite, turretType.ToString(), turretLevel, GameManager.instance.cloverUpgrade);
+                    break;
+                case TURRETTYPE.DIAMOND:
+                    GameUI.instance.GetTurretInfo(sprite, turretType.ToString(), turretLevel, GameManager.instance.diamondUpgrade);
+                    break;
+                case TURRETTYPE.HEART:
+                    GameUI.instance.GetTurretInfo(sprite, turretType.ToString(), turretLevel, GameManager.instance.heartUpgrade);
+                    break;
+                case TURRETTYPE.SPADE:
+                    GameUI.instance.GetTurretInfo(sprite, turretType.ToString(), turretLevel, GameManager.instance.spadeUpgrade);
+                    break;
+            }
+        }
+
         var turrets = GameObject.FindGameObjectsWithTag("Turret");
         float minDiff = Mathf.Infinity;
         GameObject nearTurret = null;
@@ -89,6 +111,9 @@ public class PokerTurret : MonoBehaviour
             if (turretType == pt.turretType && this.turretLevel == pt.turretLevel)
             {
                 Debug.Log("합체 성공");
+                if (GameUI.instance.turretInfo.activeSelf == true)
+                    GameUI.instance.turretInfo.SetActive(false);
+
                 GameManager.instance.createdPosition[turretPositionIndex] = false;
                 pt.turretLevel++;
                 int randomTurret = Random.Range(0, GameManager.instance.turrets.Length);
