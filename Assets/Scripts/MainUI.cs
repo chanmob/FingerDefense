@@ -11,19 +11,24 @@ public class MainUI : MonoBehaviour
     public Sprite[] soundSprites;
     private void Start()
     {
-        if (PlayerPrefs.HasKey("SOUND"))
-        {
-            var sound = PlayerPrefs.GetString("SOUND");
+        if (ObscuredPrefs.HasKey("SOUND"))
+        { 
+            var sound = ObscuredPrefs.GetInt("SOUND");
+            Debug.Log("SOUND 키 존재 : " + sound);
 
-            if (sound == "true")
-            {
-                soundOff = false;
-                AudioListener.volume = 1;
-            }
-            else if (sound == "false")
+            if (sound == 1)
             {
                 soundOff = true;
                 AudioListener.volume = 0;
+                soundImage.sprite = soundSprites[1];
+                Debug.Log(soundOff + " 로딩 완료");
+            }
+            else if (sound == 0)
+            {
+                soundOff = false;
+                AudioListener.volume = 1;
+                soundImage.sprite = soundSprites[0];
+                Debug.Log(soundOff + " 로딩 완료");
             }
         }
     }
@@ -40,7 +45,9 @@ public class MainUI : MonoBehaviour
             soundOff = false;
             AudioListener.volume = 1;
             soundImage.sprite = soundSprites[0];
-            PlayerPrefs.SetString("SOUND", soundOff.ToString());
+            ObscuredPrefs.SetInt("SOUND", 0);
+
+            Debug.Log(ObscuredPrefs.GetInt("SOUND") + " 저장완료");
         }
 
         else
@@ -48,7 +55,9 @@ public class MainUI : MonoBehaviour
             soundOff = true;
             AudioListener.volume = 0;
             soundImage.sprite = soundSprites[1];
-            PlayerPrefs.SetString("SOUND", soundOff.ToString());
+            ObscuredPrefs.SetInt("SOUND", 1);
+
+            Debug.Log(ObscuredPrefs.GetInt("SOUND") + " 저장완료");
         }
     }
 

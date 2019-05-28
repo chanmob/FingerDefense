@@ -32,6 +32,7 @@ public class GameUI : Singleton<GameUI>
     public Text[] spadeTexts;
     public Text[] cloverTexts;
     public Text[] diamondTexts;
+    public Text gameSpeedText;
 
     public Image[] questBars;
 
@@ -67,10 +68,21 @@ public class GameUI : Singleton<GameUI>
 
     public void PauseButton()
     {
-        if(Time.timeScale == 0)
+        if (Time.timeScale == 0)
+        {
             Time.timeScale = 1;
-        else
+            gameSpeedText.text = "1배속";
+        }
+        else if (Time.timeScale == 1)
+        {
+            Time.timeScale = 2;
+            gameSpeedText.text = "2배속";
+        }
+        else if (Time.timeScale == 2)
+        {
             Time.timeScale = 0;
+            gameSpeedText.text = "일시 정지";
+        }
     }
 
     public void GetTurretInfo(Sprite _sprite, string _type, int _lv, int upgrade)

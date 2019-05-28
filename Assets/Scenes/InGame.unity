@@ -2133,6 +2133,7 @@ MonoBehaviour:
   diamondTexts:
   - {fileID: 1098652964}
   - {fileID: 1952225303}
+  gameSpeedText: {fileID: 1595153990}
   questBars:
   - {fileID: 19977846}
   - {fileID: 202303493}
@@ -7369,7 +7370,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: "\uC77C\uC2DC\uC815\uC9C0"
+  m_Text: "1\uBC30\uC18D"
 --- !u!222 &1595153991
 CanvasRenderer:
   m_ObjectHideFlags: 0
