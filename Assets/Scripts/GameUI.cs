@@ -104,7 +104,7 @@ public class GameUI : Singleton<GameUI>
                 else
                     freeze = (0.1f + (_lv * 0.1f)).ToString() + " + " + (0.1f * upgrade).ToString();
 
-                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.8" + " / 둔화율 : " + freeze;
+                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.7" + " / 둔화율 : " + freeze;
                 break;
             case "DIAMOND":
                 var splash = (1.5f + (_lv * 0.25f)).ToString() + " + " + (0.25f * upgrade).ToString();
@@ -121,7 +121,7 @@ public class GameUI : Singleton<GameUI>
                 else
                     shock = (0.3f + (_lv * 0.05f)).ToString() + " + " + (0.05f * upgrade).ToString();
 
-                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.9" + " / 마비 시간 : " + shock;
+                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.7" + " / 마비 시간 : " + shock;
                 break;
         }
     }

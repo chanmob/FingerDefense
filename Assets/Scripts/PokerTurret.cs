@@ -174,7 +174,7 @@ public class PokerTurret : MonoBehaviour
         switch (turretType)
         {
             case TURRETTYPE.CLOVER:
-                timeBetFire = 0.8f;
+                timeBetFire = 0.7f;
                 break;
             case TURRETTYPE.DIAMOND:
                 timeBetFire = 0.7f;
@@ -183,7 +183,7 @@ public class PokerTurret : MonoBehaviour
                 timeBetFire = 0.3f;
                 break;
             case TURRETTYPE.SPADE:
-                timeBetFire = 0.9f;
+                timeBetFire = 0.7f;
                 break;
         }
 
@@ -222,11 +222,11 @@ public class PokerTurret : MonoBehaviour
             switch (turretType)
             {
                 case TURRETTYPE.CLOVER:
-                    b.speed = 8f;
+                    b.speed = 15f;
                     b.damage = power + gm.cloverUpgrade;
                     break;
                 case TURRETTYPE.DIAMOND:
-                    b.speed = 10f;
+                    b.speed = 15f;
                     b.damage = power + gm.diamondUpgrade;
                     break;
                 case TURRETTYPE.HEART:
@@ -235,7 +235,7 @@ public class PokerTurret : MonoBehaviour
                     break;
                 case TURRETTYPE.SPADE:
                     b.damage = power + gm.spadeUpgrade;
-                    b.speed = 8f;
+                    b.speed = 15f;
                     break;
             }
             audioSource.PlayOneShot(attackAudioClip);

@@ -35,7 +35,7 @@ public class QuestMonster : Monster
     public override void MonsterDie()
     {
         isDie = true;
-        GameManager.instance.money += (ObscuredInt)Mathf.Pow(questIdx, 2) * 100;
+        GameManager.instance.money += (ObscuredInt)Mathf.Pow(questIdx, 2) * 200;
         GameManager.instance.MoneyTextRefresh();
         Destroy(this.gameObject);
     }
