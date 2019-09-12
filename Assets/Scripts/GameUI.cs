@@ -76,7 +76,7 @@ public class GameUI : Singleton<GameUI>
         var turretInfoText = turretInfo.transform.Find("Info").GetComponent<Text>();
 
         turretImg.sprite = _sprite;
-        var power = ((_lv * 2.5f) + 1).ToString() + " + " + upgrade.ToString();
+        var power = ((Mathf.Pow(_lv,2) * 2) + 1).ToString() + " + " + upgrade.ToString();
         switch (_type)
         {
             case "CLOVER":

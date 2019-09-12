@@ -72,7 +72,7 @@ public class Monster : MonoBehaviour, IDamageable
             return;
 
         audioSource.PlayOneShot(fingerAttackClip);
-        OnDamage(GameManager.instance.touchDamage);
+        OnDamage(GameManager.instance.touchDamage + curHp * 0.03f);
     }
 
     public void OnDamage(float _damage)
