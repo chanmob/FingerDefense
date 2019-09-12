@@ -216,7 +216,7 @@ public class PokerTurret : MonoBehaviour
             {
                 b.type = turretType.ToString();
             }
-            power = (turretLevel * 2.5f) + 1;
+            power = (turretLevel * 3) + 1;
             b.level = turretLevel;
             var gm = GameManager.instance;
             switch (turretType)

@@ -9,9 +9,11 @@ public class GameUI : Singleton<GameUI>
 {
     public RectTransform upgradePanel;
     public RectTransform questPanel;
+    public RectTransform settingPanel;
 
     private bool upgradePanelOn = false;
     private bool questPanelOn = false;
+    private bool settingPanelOn = false;
 
     private ObscuredInt fingerUpgradeCost = 100;
     private ObscuredInt heartUpgradeCost = 100;
@@ -66,25 +68,6 @@ public class GameUI : Singleton<GameUI>
         StartCoroutine(SellTurretCoroutine());
     }
 
-    public void PauseButton()
-    {
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-            gameSpeedText.text = "1배속";
-        }
-        else if (Time.timeScale == 1)
-        {
-            Time.timeScale = 2;
-            gameSpeedText.text = "2배속";
-        }
-        else if (Time.timeScale == 2)
-        {
-            Time.timeScale = 0;
-            gameSpeedText.text = "일시 정지";
-        }
-    }
-
     public void GetTurretInfo(Sprite _sprite, string _type, int _lv, int upgrade)
     {
         turretInfo.SetActive(true);
@@ -104,14 +87,14 @@ public class GameUI : Singleton<GameUI>
                 else
                     freeze = (0.1f + (_lv * 0.1f)).ToString() + " + " + (0.1f * upgrade).ToString();
 
-                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.7" + " / 둔화율 : " + freeze;
+                turretInfoText.text = "공격력 : " + power + " / 둔화율 : " + freeze;
                 break;
             case "DIAMOND":
                 var splash = (1.5f + (_lv * 0.25f)).ToString() + " + " + (0.25f * upgrade).ToString();
-                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.7" + " / 범위 공격 : " + splash;
+                turretInfoText.text = "공격력 : " + power + " / 범위 공격 : " + splash;
                 break;
             case "HEART":
-                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.3";
+                turretInfoText.text = "공격력 : " + power;
                 break;
             case "SPADE":
                 float shockamount = 0.3f + (_lv * 0.05f) + (0.05f * upgrade);
@@ -121,7 +104,7 @@ public class GameUI : Singleton<GameUI>
                 else
                     shock = (0.3f + (_lv * 0.05f)).ToString() + " + " + (0.05f * upgrade).ToString();
 
-                turretInfoText.text = "공격력 : " + power + " / 공격속도 : 0.7" + " / 마비 시간 : " + shock;
+                turretInfoText.text = "공격력 : " + power + " / 마비 시간 : " + shock;
                 break;
         }
     }
@@ -155,6 +138,26 @@ public class GameUI : Singleton<GameUI>
             UIDoTween.instance.UITweenX(questPanel, -1080, 1f, Ease.OutBack);
 
         questPanelOn = !questPanelOn;
+    }
+
+    public void SettingButton()
+    {
+        if (!settingPanelOn)
+            UIDoTween.instance.UITweenX(settingPanel, 0, 1f, Ease.OutBack);
+        else
+            UIDoTween.instance.UITweenX(settingPanel, -1080, 1f, Ease.OutBack);
+
+        settingPanelOn = !settingPanelOn;
+    }
+
+    public void GameSpeed(int _speed)
+    {
+        Time.timeScale = _speed;
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 
     public void FingerUpgrade()
