@@ -411,6 +411,8 @@ MonoBehaviour:
     fakeValue: 0
     fakeValueActive: 1
   healthBar: {fileID: 1553436028077994321}
+  quest: 1
+  boss: 0
   fingerAttackClip: {fileID: 8300000, guid: 0aae817b856cdc44782ffda3136f1e71, type: 3}
   moneyClip: {fileID: 8300000, guid: 60993ec438d07c148b0c86c65fe393d0, type: 3}
   questIdx: 0

@@ -1290,7 +1290,7 @@ GameObject:
   - component: {fileID: 633215963}
   - component: {fileID: 633215962}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Admob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1308,6 +1308,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f534a0c2a82612149a5a2c4d29a7135f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewarded:
+    currentCryptoKey: 215
+    hiddenValue: 98
+    inited: 1
+    fakeValue: 0
+    fakeValueActive: 1
+  noAd: {fileID: 0}
 --- !u!4 &633215963
 Transform:
   m_ObjectHideFlags: 0

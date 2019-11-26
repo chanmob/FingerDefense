@@ -37,12 +37,14 @@ public class GameManager : Singleton<GameManager>
     public ObscuredBool[] createdPosition;
     public ObscuredBool waitForSale = false;
     private bool gameOver = false;
+    private bool watchedAD = false;
 
     public Sprite[] spadeCards;
     public Sprite[] heartCards;
     public Sprite[] cloverCards;
     public Sprite[] diamondCards;
     public Sprite noHpSprite;
+    public Sprite hpSprite;
 
     public GameObject bossMonster;
     public GameObject monsterParent;
@@ -53,6 +55,8 @@ public class GameManager : Singleton<GameManager>
     public GameObject spadeBullet;
     public GameObject diamondBullet;
     public GameObject cloverBullet;
+    public GameObject noAD;
+
     public GameObject[] turrets;
     private List<GameObject> monsterList = new List<GameObject>();
     private List<GameObject> spadeBulletList = new List<GameObject>();
@@ -72,6 +76,12 @@ public class GameManager : Singleton<GameManager>
     public AudioClip hitAudioClip;
 
     public RectTransform resultPanel;
+
+    public Button adButton;
+
+    public HashSet<GameObject> roundMonster = new HashSet<GameObject>();
+
+    private IEnumerator _waveCoroutine;
 
     public void TurretCreated()
     {
@@ -265,6 +275,11 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        Admob.instance.rewarded = false;
+        Admob.instance.noAd = noAD;
+        adButton.onClick.RemoveAllListeners();
+        adButton.onClick.AddListener(() => Admob.instance.ShowRewardAD());
+
         var temp = spawnPlaceParent.GetComponentsInChildren<Transform>();
 
         for (int i = 1; i < temp.Length; i++)
@@ -275,13 +290,17 @@ public class GameManager : Singleton<GameManager>
 
         createdPosition = new ObscuredBool[spawnPlace.Count];
 
-        StartCoroutine(CreateWave());
+        _waveCoroutine = CreateWave();
+
+        StartCoroutine(_waveCoroutine);
     }
 
     private IEnumerator CreateWave()
     {
         while (true)
         {
+            roundMonster.Clear();
+
             waveCount = 0;
             int checkTime = 5;
             for(int i = 0; i < 5; i++)
@@ -305,15 +324,34 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                for (int i = 0; i < currentWave; i++)
+                for(int i = 0; i < currentWave; i++)
+                {
+                    var m = GetMonster();
+                    roundMonster.Add(m);
+                }
+
+                var lists = roundMonster.ToList();
+                int len = lists.Count;
+
+                for(int i = 0; i < len; i++)
                 {
                     yield return new WaitForSeconds(0.5f);
 
-                    var m = GetMonster();
+                    var current = lists[i];
                     float x = Random.Range(-1.3f, 1.3f);
-                    m.transform.position = new Vector3(x, 3.2f, 0);
-                    m.SetActive(true);
+                    current.transform.position = new Vector3(x, 3.2f, 0);
+                    current.SetActive(true);
                 }
+
+                //for (int i = 0; i < currentWave; i++)
+                //{
+                //    yield return new WaitForSeconds(0.5f);
+
+                //    var m = GetMonster();
+                //    float x = Random.Range(-1.3f, 1.3f);
+                //    m.transform.position = new Vector3(x, 3.2f, 0);
+                //    m.SetActive(true);
+                //}
             }
 
             yield return new WaitWaveEnd();
@@ -346,10 +384,52 @@ public class GameManager : Singleton<GameManager>
 
     public void CheckWaveIsEnd()
     {
-        waveCount++;
+        lock (this)
+        {
+            if(roundMonster.Count == 0)
+            {
+                Debug.Log("종료로로오오옹");
+                EventManager.instance.waitForWaveToEndHandler();
+            }
 
-        if (waveCount == currentWave)
-            EventManager.instance.waitForWaveToEndHandler();
+            //waveCount++;
+
+            //Debug.Log(waveCount + " / " + currentWave + "확인");
+
+            //if (waveCount == currentWave)
+            //{
+            //    Debug.Log("종료");
+            //    EventManager.instance.waitForWaveToEndHandler();
+            //}
+        }
+    }
+
+    public void ADRestart()
+    {
+        if (watchedAD)
+            return;
+
+        gameOver = false;
+        watchedAD = true;
+
+        money += (currentWave * 100) + (buyTurretCount * 100) + 100;
+        MoneyTextRefresh();
+
+        currenthp = 5;
+        for (int i = 0; i < hpImage.Length; i++)
+        {           
+            hpImage[i].sprite = hpSprite;
+        }
+        UIDoTween.instance.UITweenY(resultPanel, -1920, 1f, Ease.OutCubic);
+        
+        if(_waveCoroutine != null)
+        {
+            StopCoroutine(_waveCoroutine);
+            _waveCoroutine = null;
+        }
+
+        _waveCoroutine = CreateWave();
+        StartCoroutine(_waveCoroutine);
     }
 
     public void MoneyTextRefresh()
@@ -396,14 +476,20 @@ public class GameManager : Singleton<GameManager>
 
         if (currenthp <= 0)
         {
+            if (watchedAD)
+                adButton.gameObject.SetActive(false);
+
             Debug.Log("게임 종료");
             gameOver = true;
             StopAllCoroutines();
+            _waveCoroutine = null;
 
             var enemys = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach(var enemy in enemys)
+            int len = enemys.Length;
+
+            for(int i = 0; i < len; i++)
             {
-                Destroy(enemy);
+                Destroy(enemys[i]);
             }
 
             int bestScore = 0;

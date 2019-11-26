@@ -21,6 +21,8 @@ public class Monster : MonoBehaviour, IDamageable
     
     public Image healthBar;
 
+    public bool normalMonster;
+
     public IEnumerator shockCoroutine;
 
     private AudioSource audioSource;
@@ -53,6 +55,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     public virtual void MonsterStatusReset()
     {
+        GameManager.instance.roundMonster.Remove(this.gameObject);
         GameManager.instance.CheckWaveIsEnd();
         speed = 1f;
         healthBar.fillAmount = 1;
@@ -72,7 +75,15 @@ public class Monster : MonoBehaviour, IDamageable
             return;
 
         audioSource.PlayOneShot(fingerAttackClip);
-        OnDamage(GameManager.instance.touchDamage + curHp * 0.03f);
+
+        if(!normalMonster)
+        {
+            OnDamage(GameManager.instance.touchDamage);
+        }
+        else
+        {
+            OnDamage(GameManager.instance.touchDamage + curHp * 0.03f);
+        }
     }
 
     public void OnDamage(float _damage)
