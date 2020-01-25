@@ -55,7 +55,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     public virtual void MonsterStatusReset()
     {
-        GameManager.instance.roundMonster.Remove(this.gameObject);
+        //GameManager.instance.roundMonster.Remove(this.gameObject);
         GameManager.instance.CheckWaveIsEnd();
         speed = 1f;
         healthBar.fillAmount = 1;

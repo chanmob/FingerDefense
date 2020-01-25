@@ -79,7 +79,7 @@ public class GameManager : Singleton<GameManager>
 
     public Button adButton;
 
-    public HashSet<GameObject> roundMonster = new HashSet<GameObject>();
+    //public HashSet<GameObject> roundMonster = new HashSet<GameObject>();
 
     private IEnumerator _waveCoroutine;
 
@@ -299,7 +299,7 @@ public class GameManager : Singleton<GameManager>
     {
         while (true)
         {
-            roundMonster.Clear();
+            //roundMonster.Clear();
 
             waveCount = 0;
             int checkTime = 5;
@@ -324,34 +324,34 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                for(int i = 0; i < currentWave; i++)
-                {
-                    var m = GetMonster();
-                    roundMonster.Add(m);
-                }
+                //for(int i = 0; i < currentWave; i++)
+                //{
+                //    var m = GetMonster();
+                //    roundMonster.Add(m);
+                //}
 
-                var lists = roundMonster.ToList();
-                int len = lists.Count;
+                //var lists = roundMonster.ToList();
+                //int len = lists.Count;
 
-                for(int i = 0; i < len; i++)
-                {
-                    yield return new WaitForSeconds(0.5f);
-
-                    var current = lists[i];
-                    float x = Random.Range(-1.3f, 1.3f);
-                    current.transform.position = new Vector3(x, 3.2f, 0);
-                    current.SetActive(true);
-                }
-
-                //for (int i = 0; i < currentWave; i++)
+                //for(int i = 0; i < len; i++)
                 //{
                 //    yield return new WaitForSeconds(0.5f);
 
-                //    var m = GetMonster();
+                //    var current = lists[i];
                 //    float x = Random.Range(-1.3f, 1.3f);
-                //    m.transform.position = new Vector3(x, 3.2f, 0);
-                //    m.SetActive(true);
+                //    current.transform.position = new Vector3(x, 3.2f, 0);
+                //    current.SetActive(true);
                 //}
+
+                for (int i = 0; i < currentWave; i++)
+                {
+                    yield return new WaitForSeconds(0.5f);
+
+                    var m = GetMonster();
+                    float x = Random.Range(-1.3f, 1.3f);
+                    m.transform.position = new Vector3(x, 3.2f, 0);
+                    m.SetActive(true);
+                }
             }
 
             yield return new WaitWaveEnd();
@@ -386,21 +386,21 @@ public class GameManager : Singleton<GameManager>
     {
         lock (this)
         {
-            if(roundMonster.Count == 0)
-            {
-                Debug.Log("종료로로오오옹");
-                EventManager.instance.waitForWaveToEndHandler();
-            }
-
-            //waveCount++;
-
-            //Debug.Log(waveCount + " / " + currentWave + "확인");
-
-            //if (waveCount == currentWave)
+            //if(roundMonster.Count == 0)
             //{
-            //    Debug.Log("종료");
+            //    Debug.Log("종료로로오오옹");
             //    EventManager.instance.waitForWaveToEndHandler();
             //}
+
+            waveCount++;
+
+            Debug.Log(waveCount + " / " + currentWave + "확인");
+
+            if (waveCount == currentWave)
+            {
+                Debug.Log("종료");
+                EventManager.instance.waitForWaveToEndHandler();
+            }
         }
     }
 
