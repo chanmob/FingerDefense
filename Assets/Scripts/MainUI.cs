@@ -11,6 +11,8 @@ public class MainUI : MonoBehaviour
     public Sprite[] soundSprites;
     private void Start()
     {
+        Admob.instance.ShowBannerAD();
+
         if (ObscuredPrefs.HasKey("SOUND"))
         { 
             var sound = ObscuredPrefs.GetInt("SOUND");

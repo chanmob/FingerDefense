@@ -7,9 +7,10 @@ using CodeStage.AntiCheat.ObscuredTypes;
 
 public class Admob : Singleton<Admob>
 {
-    private readonly string bannerID = "ca-app-pub-9954381112163314/6666860524";
-    private readonly string screenID = "ca-app-pub-9954381112163314/3410141798";
-    private readonly string rewardID = "ca-app-pub-9954381112163314/7951647640";
+    //앞 테스트광고, 뒤 애드몹 광고
+    private readonly string bannerID = "ca-app-pub-9954381112163314/6666860524";//"ca-app-pub-3940256099942544/6300978111";//"ca-app-pub-9954381112163314/6666860524";
+    private readonly string screenID = "ca-app-pub-9954381112163314/3410141798";//"ca-app-pub-3940256099942544/1033173712";//"ca-app-pub-9954381112163314/3410141798";
+    private readonly string rewardID = "ca-app-pub-9954381112163314/7951647640";//"ca-app-pub-3940256099942544/5224354917";//"ca-app-pub-9954381112163314/7951647640";
 
     private BannerView banner;
     private InterstitialAd screenAD;
@@ -21,9 +22,6 @@ public class Admob : Singleton<Admob>
 
     void Start()
     {
-        InitBannerAD();
-        banner.Show();
-
         if (rewardedAD == null)
             InitRewardedAD();
     }
@@ -32,6 +30,20 @@ public class Admob : Singleton<Admob>
     {
         InitScreenAD();
         StartCoroutine(ShowScreenADCoroutine());
+    }
+
+    public void ShowBannerAD()
+    {
+        InitBannerAD();
+        banner.Show();
+    }
+
+    public void HideBannerAD()
+    {
+        if(banner != null)
+        {
+            banner.Hide();
+        }
     }
 
     private IEnumerator ShowScreenADCoroutine()

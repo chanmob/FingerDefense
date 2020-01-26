@@ -275,6 +275,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        //Admob.instance.HideBannerAD();
         Admob.instance.rewarded = false;
         Admob.instance.noAd = noAD;
         adButton.onClick.RemoveAllListeners();
